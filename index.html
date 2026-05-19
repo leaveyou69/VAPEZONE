@@ -738,7 +738,7 @@
       min-height: 580px;
       overflow: hidden;
     }
-    #hero-vid-a, #hero-vid-b {
+    #hero-video {
       position: absolute;
       inset: 0;
       width: 100%; height: 100%;
@@ -1580,10 +1580,7 @@
 
 <!-- ──────────────── HERO ──────────────── -->
 <section id="hero">
-  <video id="hero-vid-a" muted playsinline preload="auto">
-    <source src="HERO%20%20SECTION.mp4" type="video/mp4">
-  </video>
-  <video id="hero-vid-b" muted playsinline preload="auto" style="opacity:0">
+  <video id="hero-video" muted loop playsinline preload="auto">
     <source src="HERO%20%20SECTION.mp4" type="video/mp4">
   </video>
   <div id="hero-overlay"></div>
@@ -1902,9 +1899,8 @@ const cart = {};
 
 /* ── LOADER ─────────────────────────────────────────── */
 function startLoader() {
-  vidA.currentTime = 0;
-  vidA.play().catch(() => {});
-  armLoop(vidA, vidB);
+  heroVideo.currentTime = 0;
+  heroVideo.play().catch(() => {});
   const tl = gsap.timeline({
     onComplete() {
       document.getElementById('loader').style.display = 'none';
@@ -2237,35 +2233,9 @@ gsap.from('.wa-block', {
   });
 })();
 
-/* ── DUAL-VIDEO SEAMLESS LOOP ────────────────────────── */
-const vidA = document.getElementById('hero-vid-a');
-const vidB = document.getElementById('hero-vid-b');
-
-function armLoop(playing, waiting) {
-  function onTick() {
-    if (!playing.duration) return;
-    if (playing.currentTime < playing.duration - 1.0) return;
-    playing.removeEventListener('timeupdate', onTick);
-    waiting.currentTime = 0;
-
-    function onWaitingPlaying() {
-      waiting.removeEventListener('playing', onWaitingPlaying);
-      waiting.style.opacity = '1';
-      playing.style.opacity = '0';
-      setTimeout(() => { playing.pause(); playing.currentTime = 0; }, 400);
-      armLoop(waiting, playing);
-    }
-
-    waiting.addEventListener('playing', onWaitingPlaying);
-    waiting.play().catch(() => {
-      waiting.removeEventListener('playing', onWaitingPlaying);
-    });
-  }
-  playing.addEventListener('timeupdate', onTick);
-}
-
-vidA.load();
-vidB.load();
+/* ── VIDEO ───────────────────────────────────────────── */
+const heroVideo = document.getElementById('hero-video');
+heroVideo.load();
 
 /* ── INIT ───────────────────────────────────────────── */
 renderProducts();
