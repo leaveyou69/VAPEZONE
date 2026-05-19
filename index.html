@@ -1580,7 +1580,7 @@
 
 <!-- ──────────────── HERO ──────────────── -->
 <section id="hero">
-  <video id="hero-video" muted playsinline>
+  <video id="hero-video" muted loop playsinline>
     <source src="HERO%20%20SECTION.mp4" type="video/mp4">
   </video>
   <div id="hero-overlay"></div>
@@ -2211,15 +2211,6 @@ gsap.from('.wa-block', {
 
 /* ── VIDEO — preload silențios, pornit din loader ────── */
 const heroVideo = document.getElementById('hero-video');
-heroVideo.addEventListener('timeupdate', function() {
-  if (this.duration && this.currentTime >= this.duration - 0.5) {
-    this.currentTime = 0;
-  }
-});
-heroVideo.addEventListener('ended', function() {
-  this.currentTime = 0;
-  this.play().catch(() => {});
-});
 heroVideo.load();
 
 /* ── INIT ───────────────────────────────────────────── */
