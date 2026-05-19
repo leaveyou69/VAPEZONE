@@ -958,11 +958,15 @@
       inset: 0;
       background: radial-gradient(ellipse at 50% 35%, var(--sc), #060606 68%);
       opacity: 0.55;
-      transition: opacity 0.4s;
+    }
+    .slide-img-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
     }
     .slide-img {
       position: absolute;
-      z-index: 1;
       top: 0; left: 50%;
       transform: translateX(-50%);
       height: 88%;
@@ -1037,11 +1041,13 @@
     .slide-price-old {
       font-family: var(--font-cond);
       font-size: 1rem;
-      font-weight: 400;
-      color: var(--gray-l);
+      font-weight: 600;
+      color: #e03030;
       text-decoration: line-through;
+      text-decoration-color: #e03030;
+      text-decoration-thickness: 2px;
       letter-spacing: 0.06em;
-      opacity: 0.65;
+      opacity: 1;
     }
     .slide-price {
       font-family: var(--font-display);
@@ -1941,7 +1947,7 @@ function renderProducts() {
   track.innerHTML = PRODUCTS.map((p, i) => `
     <div class="slide${i === 0 ? ' active' : ''}" style="--sc:${p.color}" data-pid="${p.id}">
       <div class="slide-bg"></div>
-      <img class="slide-img" src="${p.img}" alt="${p.name}">
+      <div class="slide-img-wrap"><img class="slide-img" src="${p.img}" alt="${p.name}"></div>
       <div class="slide-info">
         <div class="slide-meta">
           <span class="slide-brand-tag">Bang Legend · 150,000 Puffs</span>
@@ -2005,10 +2011,26 @@ function renderProducts() {
 function goSlide(idx) {
   const slides = document.querySelectorAll('.slide');
   const dots   = document.querySelectorAll('.dot');
+  const prevIdx = sliderIdx;
   sliderIdx = (idx + PRODUCTS.length) % PRODUCTS.length;
+  const dir = sliderIdx > prevIdx ? 1 : -1;
+
   document.getElementById('slider-track').style.transform = `translateX(-${sliderIdx * 100}%)`;
   slides.forEach((s, i) => s.classList.toggle('active', i === sliderIdx));
   dots.forEach((d, i)   => d.classList.toggle('active', i === sliderIdx));
+
+  const outWrap = slides[prevIdx].querySelector('.slide-img-wrap');
+  const outBg   = slides[prevIdx].querySelector('.slide-bg');
+  const inWrap  = slides[sliderIdx].querySelector('.slide-img-wrap');
+  const inBg    = slides[sliderIdx].querySelector('.slide-bg');
+
+  // Vape iese repede, glow-ul rămâne în urmă (senzație de adâncime)
+  gsap.to(outWrap, { x: -dir * 90, duration: 0.45, ease: 'power2.in', overwrite: true });
+  gsap.to(outBg,   { x: -dir * 25, duration: 0.6,  ease: 'power2.in', delay: 0.1, overwrite: true });
+
+  // Vape nou intră, glow urmează cu întârziere
+  gsap.fromTo(inWrap, { x: dir * 90 }, { x: 0, duration: 0.55, ease: 'power2.out', overwrite: true });
+  gsap.fromTo(inBg,   { x: dir * 25 }, { x: 0, duration: 0.7,  ease: 'power2.out', delay: 0.12, overwrite: true });
 }
 
 /* ── WHATSAPP SMART LINK ─────────────────────────────── */
@@ -2190,9 +2212,13 @@ gsap.from('.wa-block', {
 /* ── VIDEO — preload silențios, pornit din loader ────── */
 const heroVideo = document.getElementById('hero-video');
 heroVideo.addEventListener('timeupdate', function() {
-  if (this.duration && this.currentTime >= this.duration - 0.25) {
+  if (this.duration && this.currentTime >= this.duration - 0.5) {
     this.currentTime = 0;
   }
+});
+heroVideo.addEventListener('ended', function() {
+  this.currentTime = 0;
+  this.play().catch(() => {});
 });
 heroVideo.load();
 
