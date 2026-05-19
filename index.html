@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VapeZone — Bang Legend Pitești</title>
+  <meta name="description" content="VapeZone Pitești — Bang Legend 150K Puffs. 5 flavors premium, predare personală în Pitești. Comandă pe WhatsApp!">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+
+  <style>
+    /* ════════════════════════════════════════
+       VARIABLES
+    ════════════════════════════════════════ */
+    :root {
+      --bg:            #080808;
+      --bg2:           #0e0e0e;
+      --bg3:           #151515;
+      --bg4:           #1a1a1a;
+      --crimson:       #8B1A1A;
+      --crimson-mid:   #C41E3A;
+      --crimson-glow:  rgba(196, 30, 58, 0.35);
+      --white:         #FFFFFF;
+      --off-white:     #E8E8E8;
+      --gray-l:        #999999;
+      --gray:          #555555;
+      --gray-d:        #2a2a2a;
+      --border:        rgba(139, 26, 26, 0.22);
+      --border-w:      rgba(255, 255, 255, 0.06);
+      --font-display:  'Bebas Neue', cursive;
+      --font-cond:     'Barlow Condensed', sans-serif;
+      --font-body:     'Barlow', sans-serif;
+      --cart-w:        430px;
+      --radius:        10px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100vw; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-cond);
+      overflow-x: hidden;
+      max-width: 100vw;
+      cursor: none;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: none; }
+    img { display: block; }
+
+    /* ════════════════════════════════════════
+       AGE GATE
+    ════════════════════════════════════════ */
+    #age-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 99995;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    #age-gate-bg {
+      position: absolute;
+      inset: 0;
+      background: #020202;
+      background-image:
+        radial-gradient(ellipse at 30% 50%, rgba(139,26,26,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 50%, rgba(139,26,26,0.12) 0%, transparent 60%);
+    }
+    #age-box {
+      position: relative;
+      z-index: 1;
+      background: var(--bg2);
+      border: 1px solid rgba(196,30,58,0.35);
+      border-radius: 16px;
+      padding: 44px 40px 36px;
+      max-width: 480px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+      box-shadow: 0 0 80px rgba(139,26,26,0.2), 0 0 0 1px rgba(196,30,58,0.1);
+    }
+    #age-logo {
+      width: 100px;
+      filter: drop-shadow(0 0 20px rgba(139,26,26,0.5));
+    }
+    #age-warning-label {
+      font-family: var(--font-cond);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      color: var(--crimson-mid);
+      text-transform: uppercase;
+      background: rgba(196,30,58,0.1);
+      border: 1px solid rgba(196,30,58,0.3);
+      border-radius: 99px;
+      padding: 5px 16px;
+    }
+    #age-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 8vw, 3.2rem);
+      line-height: 0.95;
+      letter-spacing: 0.04em;
+      color: var(--crimson-mid);
+      text-shadow: 0 0 40px rgba(196,30,58,0.4);
+    }
+    #age-sub {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: var(--gray-l);
+      line-height: 1.7;
+      max-width: 360px;
+    }
+    #age-sub strong { color: var(--white); }
+    #age-check-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      text-align: left;
+      padding: 16px 18px;
+      background: var(--bg3);
+      border: 1px solid var(--border-w);
+      border-radius: 10px;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    #age-check-label:hover { border-color: var(--border); }
+    #age-check { display: none; }
+    #age-check-box {
+      width: 20px; height: 20px;
+      border: 1.5px solid var(--gray);
+      border-radius: 5px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    #age-check-box::after {
+      content: '✓';
+      font-size: 0.75rem;
+      color: #fff;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    #age-check:checked + #age-check-box {
+      background: var(--crimson-mid);
+      border-color: var(--crimson-mid);
+    }
+    #age-check:checked + #age-check-box::after { opacity: 1; }
+    #age-check-text {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--gray-l);
+      line-height: 1.55;
+    }
+    #age-check-text strong { color: var(--white); }
+    #age-enter {
+      width: 100%;
+      background: var(--crimson-mid);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 16px;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      transition: background 0.2s, opacity 0.2s, transform 0.15s;
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    #age-enter:not(:disabled) {
+      opacity: 1;
+      cursor: none;
+    }
+    #age-enter:not(:disabled):hover {
+      background: #a01028;
+      transform: translateY(-2px);
+    }
+    #age-exit {
+      font-family: var(--font-cond);
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    #age-exit:hover { color: var(--gray-l); }
+    #age-gate.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+    #terms-link {
+      color: var(--white);
+      text-decoration: underline;
+      text-decoration-color: rgba(196,30,58,0.7);
+      text-underline-offset: 2px;
+      cursor: pointer;
+      transition: color 0.2s;
+      font-weight: 600;
+    }
+    #terms-link:hover { color: var(--crimson-mid); }
+
+    /* ── TERMS MODAL ── */
+    #terms-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 99996;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(8px);
+    }
+    #terms-modal.open { display: flex; }
+    #terms-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      max-width: 640px;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #terms-header {
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border-w);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    #terms-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.06em;
+      color: var(--crimson-mid);
+    }
+    #terms-close {
+      background: none;
+      border: none;
+      color: var(--gray-l);
+      font-size: 1rem;
+      padding: 6px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    #terms-close:hover { color: var(--white); }
+    #terms-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gray-d) transparent;
+    }
+    .terms-updated {
+      font-size: 0.72rem;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      font-style: italic;
+    }
+    #terms-body h3 {
+      font-family: var(--font-cond);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--crimson-mid);
+      margin-top: 8px;
+    }
+    #terms-body p {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--gray-l);
+      line-height: 1.75;
+    }
+    #terms-body p strong { color: var(--white); }
+    #terms-footer {
+      padding: 18px 28px;
+      border-top: 1px solid var(--border-w);
+      flex-shrink: 0;
+    }
+    #terms-accept {
+      width: 100%;
+      background: var(--crimson-mid);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #terms-accept:hover { background: #a01028; }
+
+    /* ════════════════════════════════════════
+       CUSTOM CURSOR
+    ════════════════════════════════════════ */
+    #cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 10px; height: 10px;
+      background: var(--crimson-mid);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      will-change: left, top;
+    }
+    #cursor-ring {
+      position: fixed;
+      top: 0; left: 0;
+      width: 38px; height: 38px;
+      border: 1.5px solid rgba(196, 30, 58, 0.55);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99998;
+      transform: translate(-50%, -50%);
+      will-change: left, top;
+      transition: width 0.25s, height 0.25s, border-color 0.25s;
+    }
+    body.hovering #cursor-ring {
+      width: 56px; height: 56px;
+      border-color: rgba(196, 30, 58, 0.8);
+    }
+
+    /* ════════════════════════════════════════
+       GRAIN OVERLAY
+    ════════════════════════════════════════ */
+    #grain {
+      position: fixed;
+      inset: -50%;
+      width: 200%; height: 200%;
+      pointer-events: none;
+      z-index: 9990;
+      opacity: 0.042;
+      background-repeat: repeat;
+      background-size: 180px 180px;
+      animation: grainShift 0.35s steps(1) infinite;
+    }
+    @keyframes grainShift {
+      0%   { transform: translate(0,   0); }
+      14%  { transform: translate(-4px, -5px); }
+      28%  { transform: translate(5px,  -3px); }
+      42%  { transform: translate(-3px,  5px); }
+      57%  { transform: translate(4px,   4px); }
+      71%  { transform: translate(-5px,  2px); }
+      85%  { transform: translate(3px,  -4px); }
+      100% { transform: translate(0,    0); }
+    }
+
+    /* ════════════════════════════════════════
+       LOADER
+    ════════════════════════════════════════ */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9997;
+      background: #020202;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+    #loader-logo {
+      width: 150px;
+      opacity: 0;
+      transform: scale(0.85);
+      filter: drop-shadow(0 0 40px rgba(196, 30, 58, 0.6));
+    }
+    #loader-track {
+      width: 220px;
+      height: 1.5px;
+      background: rgba(139, 26, 26, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    #loader-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--crimson), var(--crimson-mid));
+    }
+    #loader-label {
+      font-family: var(--font-cond);
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      color: var(--crimson-mid);
+      text-transform: uppercase;
+      opacity: 0;
+    }
+
+    /* ════════════════════════════════════════
+       NAVBAR
+    ════════════════════════════════════════ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 500;
+      height: 68px;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(8, 8, 8, 0.75);
+      backdrop-filter: blur(12px);
+      transition: background 0.3s, border-color 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+    #navbar.solid {
+      background: rgba(8, 8, 8, 0.96);
+      backdrop-filter: blur(20px);
+      border-bottom-color: var(--border);
+    }
+    .nav-logo img {
+      height: 46px;
+      object-fit: contain;
+      transition: filter 0.3s;
+    }
+    .nav-logo:hover img { filter: drop-shadow(0 0 12px var(--crimson-glow)); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-cond);
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      color: var(--gray-l);
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--crimson-mid);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .nav-cart {
+      position: relative;
+      background: none;
+      border: none;
+      color: var(--white);
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+    .nav-cart:hover { color: var(--crimson-mid); }
+    .nav-cart svg { width: 22px; height: 22px; stroke-width: 1.8; }
+    .cart-badge {
+      position: absolute;
+      top: 0; right: 0;
+      width: 17px; height: 17px;
+      background: var(--crimson-mid);
+      border-radius: 50%;
+      font-size: 0.6rem;
+      font-weight: 700;
+      font-family: var(--font-body);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0);
+      transition: opacity 0.2s, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .cart-badge.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .nav-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(37, 211, 102, 0.12);
+      border: 1px solid rgba(37, 211, 102, 0.35);
+      border-radius: 6px;
+      padding: 8px 18px;
+      font-family: var(--font-cond);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #25D366;
+      text-transform: uppercase;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+    .nav-wa-btn:hover {
+      background: rgba(37, 211, 102, 0.22);
+      border-color: rgba(37, 211, 102, 0.6);
+      transform: translateY(-1px);
+    }
+    .nav-wa-btn svg { width: 16px; height: 16px; fill: #25D366; }
+
+    /* ════════════════════════════════════════
+       CART SIDEBAR
+    ════════════════════════════════════════ */
+    #cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(6px);
+      z-index: 799;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s;
+    }
+    #cart-overlay.open { opacity: 1; pointer-events: all; }
+    #cart-panel {
+      position: fixed;
+      top: 0; right: 0;
+      width: min(var(--cart-w), 100vw);
+      height: 100vh;
+      background: var(--bg2);
+      border-left: 1px solid var(--border);
+      z-index: 800;
+      transform: translateX(100%);
+      transition: transform 0.38s cubic-bezier(0.77, 0, 0.175, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    #cart-panel.open { transform: translateX(0); }
+    .cart-head {
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--border-w);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .cart-head-title {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      letter-spacing: 0.05em;
+    }
+    .cart-head-close {
+      background: none;
+      border: none;
+      color: var(--gray-l);
+      font-size: 1.1rem;
+      line-height: 1;
+      padding: 6px;
+      transition: color 0.2s;
+    }
+    .cart-head-close:hover { color: var(--white); }
+    .cart-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gray-d) transparent;
+    }
+    .cart-empty-msg {
+      text-align: center;
+      margin-top: 64px;
+      color: var(--gray);
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      line-height: 1.7;
+    }
+    .cart-empty-msg strong { display: block; font-size: 1.1rem; color: var(--gray-l); margin-bottom: 4px; }
+    .cart-line {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--border-w);
+    }
+    .cart-line:last-child { border-bottom: none; padding-bottom: 0; }
+    .cart-line-img {
+      width: 64px;
+      height: 82px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .cart-line-meta { flex: 1; min-width: 0; }
+    .cart-line-brand {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .cart-line-name {
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 10px;
+    }
+    .cart-line-qty {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .qty-btn {
+      width: 26px; height: 26px;
+      background: var(--bg3);
+      border: 1px solid var(--border-w);
+      border-radius: 5px;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: var(--font-cond);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .qty-btn:hover { background: var(--crimson); border-color: var(--crimson); }
+    .qty-num {
+      font-weight: 700;
+      font-size: 1rem;
+      min-width: 22px;
+      text-align: center;
+    }
+    .cart-line-price {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      letter-spacing: 0.03em;
+      color: var(--white);
+      align-self: flex-start;
+      white-space: nowrap;
+    }
+    .cart-line-del {
+      background: none;
+      border: none;
+      color: var(--gray);
+      font-size: 0.85rem;
+      padding: 4px;
+      margin-left: -4px;
+      transition: color 0.2s;
+      align-self: flex-start;
+    }
+    .cart-line-del:hover { color: var(--crimson-mid); }
+    .cart-foot {
+      padding: 22px 28px;
+      border-top: 1px solid var(--border-w);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+    .cart-foot-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .cart-foot-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      color: var(--gray-l);
+      text-transform: uppercase;
+    }
+    .cart-foot-sum {
+      font-family: var(--font-display);
+      font-size: 2.1rem;
+      letter-spacing: 0.03em;
+    }
+    .cart-delivery-note {
+      font-size: 0.74rem;
+      color: var(--gray);
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+    .cart-delivery-note span {
+      color: var(--crimson-mid);
+      font-weight: 600;
+    }
+    .cart-wa-order {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #25D366;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 15px 20px;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      letter-spacing: 0.07em;
+      text-align: center;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .cart-wa-order:hover { background: #1ebe5c; transform: translateY(-2px); }
+    .cart-wa-order svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
+
+    /* ════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      height: 100svh;
+      min-height: 580px;
+      overflow: hidden;
+    }
+    #hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    #hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(to bottom,
+          rgba(8,8,8,0.50) 0%,
+          rgba(8,8,8,0.30) 40%,
+          rgba(8,8,8,0.55) 70%,
+          rgba(8,8,8,1.00) 100%
+        );
+    }
+    .hero-logo-img {
+      position: absolute;
+      top: 88px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      width: clamp(150px, 38vw, 250px);
+      filter: drop-shadow(0 0 50px rgba(139,26,26,0.55));
+      opacity: 0;
+    }
+    .hero-bottom {
+      position: absolute;
+      bottom: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      width: min(400px, 92vw);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+    .hero-heading {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 11vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      text-shadow: 0 0 80px rgba(139,26,26,0.25);
+      opacity: 0;
+    }
+    .hero-heading em {
+      font-style: normal;
+      color: var(--crimson-mid);
+    }
+    .hero-sub {
+      font-family: var(--font-cond);
+      font-size: clamp(0.78rem, 1.8vw, 1rem);
+      letter-spacing: 0.28em;
+      color: var(--gray-l);
+      text-transform: uppercase;
+      font-weight: 400;
+      opacity: 0;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      opacity: 0;
+    }
+    .btn-red {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 8px;
+      background: var(--crimson-mid);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 14px 34px;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      letter-spacing: 0.08em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-red:hover { background: #a01028; transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--off-white);
+      border: 1.5px solid rgba(255,255,255,0.22);
+      border-radius: 7px;
+      padding: 14px 34px;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      letter-spacing: 0.08em;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.04);
+      transform: translateY(-2px);
+    }
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      opacity: 0;
+    }
+    .hero-scroll-hint span {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
+    .scroll-track {
+      width: 1px;
+      height: 44px;
+      position: relative;
+      background: rgba(255,255,255,0.1);
+      overflow: hidden;
+    }
+    .scroll-track::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 1px;
+      background: var(--crimson-mid);
+      animation: scrollDrop 1.6s ease-in-out infinite;
+    }
+    @keyframes scrollDrop {
+      0% { height: 0; top: 0; }
+      50% { height: 44px; top: 0; }
+      100% { height: 0; top: 44px; }
+    }
+
+    /* ════════════════════════════════════════
+       SECTIONS SHARED
+    ════════════════════════════════════════ */
+    section { padding: 110px 0; }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .eyebrow {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.32em;
+      color: var(--crimson-mid);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .sec-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 0.92;
+      letter-spacing: 0.04em;
+    }
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--crimson-mid);
+      margin: 18px 0 64px;
+    }
+
+    /* ════════════════════════════════════════
+       PRODUCTS SLIDER
+    ════════════════════════════════════════ */
+    #products {
+      background: var(--bg);
+      height: 100svh;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      padding-top: 80px;
+      padding-bottom: 0;
+    }
+    #products .wrap { flex-shrink: 0; }
+    #slider-wrap {
+      position: relative;
+      overflow: hidden;
+      flex: 1;
+      min-height: 420px;
+    }
+    #slider-track {
+      display: flex;
+      height: 100%;
+      min-height: 380px;
+      transition: transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      min-height: 380px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 35%, var(--sc), #060606 68%);
+      opacity: 0.55;
+      transition: opacity 0.4s;
+    }
+    .slide-img {
+      position: absolute;
+      z-index: 1;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      height: 88%;
+      max-height: 600px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 70px var(--sc));
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      user-select: none;
+      pointer-events: none;
+    }
+    .slide.active .slide-img { transform: translateX(-50%) scale(1.04); }
+    .slide-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 2;
+      padding: 60px 40px 36px;
+      background: linear-gradient(to top,
+        rgba(6,6,6,1) 0%,
+        rgba(6,6,6,0.85) 50%,
+        transparent 100%
+      );
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .slide-meta { flex: 1; min-width: 0; }
+    .slide-brand-tag {
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      color: var(--gray-l);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .slide-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 6vw, 3rem);
+      line-height: 0.95;
+      letter-spacing: 0.04em;
+      color: var(--white);
+    }
+    .slide-chips {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .slide-chip {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-l);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      padding: 3px 9px;
+    }
+    .slide-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .slide-price {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .slide-price sub {
+      font-size: 1rem;
+      font-family: var(--font-cond);
+      font-weight: 400;
+      color: var(--gray-l);
+      vertical-align: baseline;
+      margin-left: 2px;
+    }
+    .slide-add {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--crimson-mid);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 22px;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .slide-add:hover { background: #a01028; transform: translateY(-2px); }
+    .slide-add.popped {
+      background: #25D366;
+      animation: popAnim 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+    }
+    @keyframes popAnim {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.2); }
+      60% { transform: scale(0.92); }
+      100% { transform: scale(1); }
+    }
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      background: rgba(8,8,8,0.6);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50%;
+      width: 48px; height: 48px;
+      color: var(--white);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+      backdrop-filter: blur(8px);
+    }
+    .slider-arrow:hover { background: var(--crimson-mid); border-color: var(--crimson-mid); }
+    #sliderPrev { left: 20px; }
+    #sliderNext { right: 20px; }
+    #slider-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      transition: background 0.3s, transform 0.3s;
+    }
+    .dot.active {
+      background: var(--white);
+      transform: scale(1.4);
+    }
+
+    /* ════════════════════════════════════════
+       ABOUT SECTION
+    ════════════════════════════════════════ */
+    #about {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 90px;
+      align-items: start;
+    }
+    .about-body p {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--gray-l);
+      margin-bottom: 22px;
+    }
+    .about-body p strong { color: var(--white); font-weight: 600; }
+    .about-body p:last-child { margin-bottom: 0; }
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 44px;
+    }
+    .stat-box {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .stat-val {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--crimson-mid);
+    }
+    .stat-lbl {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
+    .features-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 80px;
+    }
+    .feature-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px;
+      background: var(--bg3);
+      border: 1px solid var(--border-w);
+      border-radius: var(--radius);
+      transition: border-color 0.25s;
+    }
+    .feature-card:hover { border-color: var(--border); }
+    .feat-icon {
+      width: 42px; height: 42px;
+      background: rgba(139,26,26,0.12);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .feat-icon svg { width: 20px; height: 20px; stroke: var(--crimson-mid); }
+    .feat-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .feat-desc {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: var(--gray-l);
+      line-height: 1.55;
+    }
+
+    /* ════════════════════════════════════════
+       CONTACT SECTION
+    ════════════════════════════════════════ */
+    #contact { background: var(--bg); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .contact-left { display: flex; flex-direction: column; gap: 36px; }
+    .delivery-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(139,26,26,0.08);
+      border: 1px solid rgba(196,30,58,0.3);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+    }
+    .delivery-card-emoji { font-size: 1.7rem; line-height: 1; }
+    .delivery-card-txt strong {
+      display: block;
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .delivery-card-txt span {
+      font-size: 0.8rem;
+      color: var(--gray-l);
+    }
+    .contact-rows { display: flex; flex-direction: column; gap: 20px; }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .c-icon {
+      width: 44px; height: 44px;
+      background: var(--bg3);
+      border: 1px solid var(--border-w);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .c-icon svg { width: 20px; height: 20px; stroke: var(--crimson-mid); }
+    .c-lbl {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .c-val {
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+    }
+    .wa-block {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .wa-block-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: 0.04em;
+    }
+    .wa-block-desc {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--gray-l);
+      line-height: 1.7;
+    }
+    .wa-btn-full {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: #25D366;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 18px 24px;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      letter-spacing: 0.06em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .wa-btn-full:hover { background: #1ebe5c; transform: translateY(-2px); }
+    .wa-btn-full svg { width: 26px; height: 26px; fill: #fff; }
+    .wa-footnote {
+      font-size: 0.72rem;
+      color: var(--gray);
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+
+    /* ════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════ */
+    footer {
+      background: #050505;
+      border-top: 1px solid var(--border);
+      padding: 36px 48px;
+    }
+    .footer-row {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+    }
+    .footer-logo img { height: 42px; opacity: 0.65; }
+    .footer-copy {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: var(--gray);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .footer-copy strong { color: var(--gray-l); }
+    .footer-nav {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .footer-nav a {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: var(--gray-l); }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════ */
+    @media (max-width: 1100px) {
+      .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 52px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 44px; }
+      .features-col { padding-top: 0; }
+    }
+    @media (max-width: 720px) {
+      #navbar { padding: 0 20px; height: 60px; }
+      .nav-links { display: none; }
+      .wrap { padding: 0 20px; }
+      section { padding: 72px 0; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .product-thumb { min-height: 180px; padding: 24px 14px 18px; }
+      .product-thumb img { width: 80px; }
+      .hero-ctas { flex-direction: column; gap: 10px; }
+      .btn-red, .btn-ghost { width: 100%; }
+      .hero-scroll-hint { display: none; }
+      .hero-logo-img { top: 76px; width: clamp(130px, 42vw, 200px); }
+      .hero-bottom { bottom: 36px; }
+      #slider-wrap { min-height: 380px; }
+      .slide-info { flex-direction: column; align-items: flex-start; padding: 36px 20px 20px; gap: 8px; }
+      .slide-right { flex-direction: row; align-items: center; justify-content: space-between; width: 100%; }
+      .slide-name { font-size: clamp(1.5rem, 7vw, 2rem); }
+      .slide-price { font-size: 2.2rem; }
+      .slide-add { padding: 10px 16px; font-size: 1rem; }
+      .slider-arrow { width: 36px; height: 36px; font-size: 0.85rem; }
+      #sliderPrev { left: 8px; }
+      #sliderNext { right: 8px; }
+      #slider-dots { bottom: 12px; }
+      .stats-row { grid-template-columns: 1fr 1fr; gap: 20px; }
+      footer { padding: 28px 20px; }
+      .footer-row { gap: 16px; }
+      .footer-copy { white-space: normal; }
+      #cursor, #cursor-ring { display: none; }
+      body { cursor: auto; }
+      button { cursor: pointer; }
+      a { cursor: pointer; }
+      .wa-block { padding: 28px 22px; }
+    }
+    @media (max-width: 480px) {
+      .products-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ──────────────── AGE GATE ──────────────── -->
+<div id="age-gate">
+  <div id="age-gate-bg"></div>
+  <div id="age-box">
+    <img id="age-logo" src="LOGO%20%20VAPEZONE.png" alt="VapeZone">
+    <div id="age-warning-label">⚠ WARNING</div>
+    <h2 id="age-title">CONȚINUT<br>RESTRICȚIONAT</h2>
+    <p id="age-sub">Acest site comercializează produse cu nicotină, destinate exclusiv adulților. Accesul este permis doar persoanelor care au împlinit <strong>18 ani</strong>.</p>
+    <label id="age-check-label">
+      <input type="checkbox" id="age-check">
+      <span id="age-check-box"></span>
+      <span id="age-check-text">Confirm că am cel puțin <strong>18 ani</strong> și sunt de acord cu <span id="terms-link">Termenii și Condițiile</span></span>
+    </label>
+    <button id="age-enter" disabled>INTRU PE SITE</button>
+    <a id="age-exit" href="https://www.google.com">NU AM 18 ANI — IEȘI</a>
+  </div>
+</div>
+
+<!-- ──────────────── TERMS MODAL ──────────────── -->
+<div id="terms-modal">
+  <div id="terms-box">
+    <div id="terms-header">
+      <span id="terms-title">TERMENI ȘI CONDIȚII</span>
+      <button id="terms-close">✕</button>
+    </div>
+    <div id="terms-body">
+      <p class="terms-updated">Ultima actualizare: Mai 2025</p>
+
+      <h3>1. Acceptarea Termenilor</h3>
+      <p>Prin accesarea și utilizarea site-ului VapeZone (denumit în continuare „Site-ul"), utilizatorul declară în mod expres că a citit, înțeles și acceptat în totalitate prezenții Termeni și Condiții. Dacă nu sunteți de acord cu oricare dintre prevederile prezentului document, vă rugăm să nu accesați sau să nu utilizați Site-ul.</p>
+
+      <h3>2. Restricție de Vârstă</h3>
+      <p>Produsele comercializate prin intermediul acestui site conțin nicotină și sunt destinate exclusiv persoanelor care au împlinit vârsta de <strong>18 ani</strong>. Prin accesarea Site-ului și plasarea unei comenzi, utilizatorul declară pe propria răspundere că are cel puțin 18 ani. VapeZone nu își asumă nicio răspundere în cazul în care utilizatorul a furnizat informații false cu privire la vârsta sa. Orice consecință legală, civilă sau penală rezultată din furnizarea de informații false revine în exclusivitate utilizatorului.</p>
+
+      <h3>3. Avertisment de Sănătate</h3>
+      <p>Produsele cu nicotină sunt dăunătoare sănătății și pot crea dependență. VapeZone nu face nicio declarație cu privire la efectele asupra sănătății și nu recomandă utilizarea acestor produse. Utilizarea produselor se face pe propria răspundere a cumpărătorului. VapeZone nu răspunde pentru niciun prejudiciu, boală, afecțiune sau consecință negativă asupra sănătății care poate rezulta, direct sau indirect, din utilizarea produselor achiziționate.</p>
+
+      <h3>4. Limitarea Răspunderii</h3>
+      <p>VapeZone, angajații, asociații, partenerii și colaboratorii săi nu vor fi răspunzători, în nicio situație și în nicio măsură, pentru daune directe, indirecte, incidentale, speciale, punitive sau consecvente, inclusiv dar fără a se limita la: pierderi de profit, pierderi de date, vătămări corporale sau prejudicii morale, rezultate din sau în legătură cu utilizarea sau imposibilitatea utilizării produselor sau a Site-ului. Această limitare a răspunderii se aplică indiferent de natura acțiunii, fie că este vorba de contract, delict civil sau orice altă teorie juridică.</p>
+
+      <h3>5. Caracterul Informativ al Descrierilor</h3>
+      <p>Toate descrierile, imaginile, specificațiile tehnice și informațiile despre produse prezentate pe Site sunt furnizate cu titlu pur informativ. VapeZone depune eforturi rezonabile pentru a menține acuratețea acestor informații, însă nu garantează că acestea sunt complete, corecte sau actualizate în orice moment. VapeZone nu răspunde pentru eventualele discrepanțe dintre descrierea produsului pe Site și caracteristicile efective ale produsului livrat.</p>
+
+      <h3>6. Livrare și Predare Personală</h3>
+      <p>VapeZone oferă servicii de predare personală exclusiv în orașul Pitești și împrejurimi. VapeZone nu răspunde pentru întârzieri cauzate de factori externi (condiții meteo, evenimente de forță majoră, restricții de circulație). Predarea produselor se face exclusiv persoanelor care pot face dovada că au împlinit 18 ani, la solicitarea reprezentantului VapeZone. Refuzul de a prezenta un act de identitate valabil atrage anularea comenzii fără nicio obligație de despăgubire din partea VapeZone.</p>
+
+      <h3>7. Conformitatea Produselor</h3>
+      <p>Produsele comercializate sunt produse originale, achiziționate de la distribuitori autorizați. VapeZone nu răspunde pentru utilizarea necorespunzătoare a produselor, pentru modificările aduse produselor de către utilizator sau pentru daune cauzate de nerespectarea instrucțiunilor de utilizare. Garanția, dacă există, este oferită exclusiv de producătorul produsului, conform politicii acestuia.</p>
+
+      <h3>8. Proprietatea Intelectuală</h3>
+      <p>Toate elementele grafice, textuale, fotografiile, logo-urile și designul Site-ului sunt proprietatea exclusivă a VapeZone sau sunt utilizate cu acordul titularilor de drepturi. Reproducerea, distribuirea, modificarea sau utilizarea oricărui element al Site-ului fără acordul scris prealabil al VapeZone este strict interzisă și poate atrage răspunderea civilă și penală.</p>
+
+      <h3>9. Prelucrarea Datelor cu Caracter Personal</h3>
+      <p>VapeZone prelucrează datele cu caracter personal furnizate de utilizatori exclusiv în scopul procesării comenzilor și al comunicării legate de acestea, în conformitate cu prevederile Regulamentului (UE) 2016/679 (GDPR). Datele nu vor fi transmise către terți fără consimțământul explicit al utilizatorului, cu excepția situațiilor prevăzute expres de lege.</p>
+
+      <h3>10. Modificarea Termenilor</h3>
+      <p>VapeZone își rezervă dreptul de a modifica prezenții Termeni și Condiții în orice moment, fără notificare prealabilă. Continuarea utilizării Site-ului după publicarea modificărilor constituie acceptarea tacită a noilor termeni. Utilizatorii sunt sfătuiți să verifice periodic prezentul document.</p>
+
+      <h3>11. Legea Aplicabilă și Jurisdicția</h3>
+      <p>Prezenții Termeni și Condiții sunt guvernați de legea română. Orice litigiu decurgând din sau în legătură cu prezentul document va fi soluționat de instanțele judecătorești competente din România, după epuizarea căilor amiabile de soluționare.</p>
+
+      <h3>12. Forța Majoră</h3>
+      <p>VapeZone nu răspunde pentru neexecutarea sau executarea necorespunzătoare a obligațiilor contractuale în situațiile de forță majoră, astfel cum sunt definite de legislația română în vigoare, inclusiv dar fără a se limita la: calamități naturale, pandemii, greve, acte ale autorităților publice, pene de curent sau întreruperi ale infrastructurii de comunicații.</p>
+    </div>
+    <div id="terms-footer">
+      <button id="terms-accept">AM ÎNȚELES</button>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────── GRAIN ──────────────── -->
+<div id="grain"></div>
+
+<!-- ──────────────── CURSOR ──────────────── -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ──────────────── LOADER ──────────────── -->
+<div id="loader">
+  <img id="loader-logo" src="LOGO%20%20VAPEZONE.png" alt="VapeZone">
+  <div id="loader-track">
+    <div id="loader-fill"></div>
+  </div>
+  <div id="loader-label">Se încarcă</div>
+</div>
+
+<!-- ──────────────── NAVBAR ──────────────── -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img src="LOGO%20%20VAPEZONE.png" alt="VapeZone">
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#products">Flavors</a></li>
+    <li><a href="#about">Despre Noi</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="nav-cart" id="cartToggle" aria-label="Deschide coșul">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+      </svg>
+      <div class="cart-badge" id="cartBadge">0</div>
+    </button>
+
+    <a href="https://wa.me/40743391581" target="_blank" rel="noopener" class="nav-wa-btn">
+      <svg viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Comandă
+    </a>
+  </div>
+</nav>
+
+<!-- ──────────────── CART ──────────────── -->
+<div id="cart-overlay"></div>
+<div id="cart-panel">
+  <div class="cart-head">
+    <span class="cart-head-title">COȘUL TĂU</span>
+    <button class="cart-head-close" id="cartClose">✕</button>
+  </div>
+
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty-msg" id="cartEmptyMsg">
+      <strong>Coșul este gol</strong>
+      Alege un flavor și adaugă-l!
+    </div>
+  </div>
+
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-foot-total">
+      <span class="cart-foot-label">Total</span>
+      <span class="cart-foot-sum" id="cartTotal">0 LEI</span>
+    </div>
+    <p class="cart-delivery-note">📍 Predare personală în <span>Pitești</span> · Transport inclus</p>
+    <p class="cart-delivery-note">🔒 În curând — <span>Plată cu cardul</span></p>
+    <a id="cartWaLink" href="#" target="_blank" rel="noopener" class="cart-wa-order">
+      <svg viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      COMANDĂ PE WHATSAPP
+    </a>
+  </div>
+</div>
+
+<!-- ──────────────── HERO ──────────────── -->
+<section id="hero">
+  <video id="hero-video" muted loop playsinline>
+    <source src="HERO%20%20SECTION.mp4" type="video/mp4">
+  </video>
+  <div id="hero-overlay"></div>
+
+  <img class="hero-logo-img" src="LOGO%20%20VAPEZONE.png" alt="VapeZone">
+
+  <div class="hero-bottom">
+    <h1 class="hero-heading">EXPERIENCE<br><em>THE LEGEND</em></h1>
+    <p class="hero-sub">5 Flavors Premium &nbsp;·&nbsp; 150,000 Puffs &nbsp;·&nbsp; Predare Personală</p>
+    <div class="hero-ctas">
+      <a href="#products" class="btn-red">ALEGE AROMA</a>
+      <a href="https://wa.me/40743391581" target="_blank" rel="noopener" class="btn-ghost">COMANDĂ ACUM</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" id="scrollHint">
+    <span>Scroll</span>
+    <div class="scroll-track"></div>
+  </div>
+</section>
+
+<!-- ──────────────── PRODUCTS ──────────────── -->
+<section id="products">
+  <div class="wrap" style="text-align:center">
+    <span class="eyebrow">Bang Legend Collection</span>
+    <h2 class="sec-title">CHOOSE YOUR<br>FLAVOR</h2>
+    <div class="divider" style="margin-left:auto;margin-right:auto"></div>
+  </div>
+  <div id="slider-wrap">
+    <div id="slider-track"></div>
+    <button class="slider-arrow" id="sliderPrev">&#8592;</button>
+    <button class="slider-arrow" id="sliderNext">&#8594;</button>
+    <div id="slider-dots"></div>
+  </div>
+</section>
+
+<!-- ──────────────── ABOUT ──────────────── -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-body">
+        <span class="eyebrow">Despre VapeZone</span>
+        <h2 class="sec-title">NU E JUST<br>UN VAPE</h2>
+        <div class="divider"></div>
+        <p>La <strong>VapeZone</strong> nu vindem produse — livrăm experiențe. Bang Legend 150K Puffs este alegerea celor care știu exact ce vor: flavors intense, autonomie lungă și calitate premium la fiecare puf.</p>
+        <p>Suntem din <strong>Pitești</strong> și livrăm personal, direct la tine. Nicio așteptare la curier, nicio surpriză la pachet. Simplu, rapid, de încredere.</p>
+        <div class="stats-row">
+          <div class="stat-box">
+            <span class="stat-val">150K</span>
+            <span class="stat-lbl">Puffs per device</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-val">5</span>
+            <span class="stat-lbl">Flavors disponibile</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-val">70</span>
+            <span class="stat-lbl">Lei per bucată</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-val">0</span>
+            <span class="stat-lbl">Surprize la livrare</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="features-col">
+        <div class="feature-card">
+          <div class="feat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="feat-title">Calitate garantată</div>
+            <div class="feat-desc">Bang Legend e un brand consacrat la nivel global. Fiecare device vine sigilat, niciun compromis la calitate sau autenticitate.</div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="feat-title">Predare personală Pitești</div>
+            <div class="feat-desc">Livrăm noi la tine, oriunde în Pitești. Fără curier, fără comisioane ascunse, fără zile de așteptare.</div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="feat-title">Răspuns instant pe WhatsApp</div>
+            <div class="feat-desc">Scrii, răspundem imediat. Stabilim locul și ora în câteva mesaje. Comanda ta e prioritatea noastră.</div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="feat-title">Preț corect, fără surprize</div>
+            <div class="feat-desc">70 lei per bucată, punct. Nicio taxă de livrare, nicio comision, nicio surpriză la final.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────── CONTACT ──────────────── -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <div>
+          <span class="eyebrow">Comandă Acum</span>
+          <h2 class="sec-title">SIMPLU<br>& RAPID</h2>
+          <div class="divider"></div>
+        </div>
+
+        <div class="delivery-card">
+          <span class="delivery-card-emoji">📍</span>
+          <div class="delivery-card-txt">
+            <strong>Predare Personală</strong>
+            <span>Pitești · Transport inclus în preț</span>
+          </div>
+        </div>
+
+        <div class="contact-rows">
+          <div class="contact-row">
+            <div class="c-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.948V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="c-lbl">Telefon / WhatsApp</div>
+              <div class="c-val">0743 391 581</div>
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <div class="c-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="c-lbl">Program</div>
+              <div class="c-val">Lun – Dum &nbsp;·&nbsp; 09:00 – 21:00</div>
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <div class="c-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="c-lbl">Zonă de livrare</div>
+              <div class="c-val">Pitești & împrejurimi</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wa-block">
+        <h3 class="wa-block-title">COMANDĂ DIRECT<br>PE WHATSAPP</h3>
+        <p class="wa-block-desc">Selectează flavors-urile din catalog, adaugă-le în coș și apasă „Comandă pe WhatsApp". Primești un mesaj pre-completat cu comanda ta — noi preluăm imediat și stabilim predarea.</p>
+        <a href="https://wa.me/40743391581?text=Bun%C4%83%20ziua!%20Vreau%20s%C4%83%20comand%20de%20la%20VapeZone%20%F0%9F%94%A5" target="_blank" rel="noopener" class="wa-btn-full">
+          <svg viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          SCRIE-NE ACUM
+        </a>
+        <p class="wa-footnote">Sau adaugă produse în coș și comandă direct cu lista completă generată automat</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────── FOOTER ──────────────── -->
+<footer>
+  <div class="footer-row">
+    <div class="footer-logo">
+      <img src="LOGO%20%20VAPEZONE.png" alt="VapeZone">
+    </div>
+    <p class="footer-copy">© 2026 VapeZone · Pitești &nbsp;·&nbsp; Produs exclusiv pentru <strong>persoane majore (18+)</strong></p>
+    <ul class="footer-nav">
+      <li><a href="#products">Flavors</a></li>
+      <li><a href="#about">Despre Noi</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://wa.me/40743391581" target="_blank" rel="noopener">WhatsApp</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+/* ── DATA ─────────────────────────────────────────── */
+const PRODUCTS = [
+  {
+    id:    'wb',
+    name:  'Watermelon Berries',
+    img:   'poze%20produse%20finale/watermelon%20berries.png',
+    price: 70,
+    color: '#C41E2A',
+  },
+  {
+    id:    'br',
+    name:  'Blueberry Raspberry',
+    img:   'poze%20produse%20finale/blueberry%20raspberry.png',
+    price: 70,
+    color: '#1E4FBF',
+  },
+  {
+    id:    'gbg',
+    name:  'Grape Bubble Gum',
+    img:   'poze%20produse%20finale/grape%20bubble%20gum.png',
+    price: 70,
+    color: '#7B1EC4',
+  },
+  {
+    id:    'gl',
+    name:  'Guava Lime',
+    img:   'poze%20produse%20finale/guava%20lime.png',
+    price: 70,
+    color: '#1EC43A',
+  },
+  {
+    id:    'mp',
+    name:  'Mango Peach',
+    img:   'poze%20produse%20finale/mango%20peach.png',
+    price: 70,
+    color: '#C4871E',
+  },
+];
+
+/* ── CART STATE ────────────────────────────────────── */
+const cart = {};
+
+/* ── GRAIN GENERATOR ──────────────────────────────── */
+(function generateGrain() {
+  const c = document.createElement('canvas');
+  c.width = 180; c.height = 180;
+  const ctx = c.getContext('2d');
+  const id = ctx.createImageData(180, 180);
+  const d = id.data;
+  for (let i = 0; i < d.length; i += 4) {
+    const v = (Math.random() * 255) | 0;
+    d[i] = d[i+1] = d[i+2] = v;
+    d[i+3] = 255;
+  }
+  ctx.putImageData(id, 0, 0);
+  document.getElementById('grain').style.backgroundImage = `url(${c.toDataURL()})`;
+})();
+
+/* ── CUSTOM CURSOR ──────────────────────────────────── */
+(function initCursor() {
+  const dot  = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = -100, my = -100;
+  let rx = -100, ry = -100;
+
+  window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  (function loop() {
+    rx += (mx - rx) * 0.14;
+    ry += (my - ry) * 0.14;
+    dot.style.left  = mx + 'px';
+    dot.style.top   = my + 'px';
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(loop);
+  })();
+
+  document.addEventListener('mousedown', () => { dot.style.transform = 'translate(-50%,-50%) scale(0.65)'; });
+  document.addEventListener('mouseup',   () => { dot.style.transform = 'translate(-50%,-50%) scale(1)'; });
+
+  document.querySelectorAll('a, button, .product-card').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+  });
+})();
+
+/* ── LOADER ─────────────────────────────────────────── */
+function startLoader() {
+  heroVideo.currentTime = 0;
+  heroVideo.play().catch(() => {});
+  const tl = gsap.timeline({
+    onComplete() {
+      document.getElementById('loader').style.display = 'none';
+      revealHero();
+    }
+  });
+  tl.to('#loader-logo', { opacity: 1, scale: 1, duration: 0.65, ease: 'back.out(1.4)' })
+    .to('#loader-fill',  { width: '100%', duration: 1.1, ease: 'power2.inOut' }, '-=0.2')
+    .to('#loader-label', { opacity: 1, duration: 0.4 }, '-=0.7')
+    .to('#loader',       { opacity: 0, duration: 0.55, delay: 0.15 });
+}
+
+/* ── HERO REVEAL ─────────────────────────────────────── */
+gsap.set(['.hero-logo-img', '.hero-heading', '.hero-sub', '.hero-ctas'], {
+  opacity: 0, y: 28
+});
+
+function revealHero() {
+  const tl = gsap.timeline();
+  tl.to('.hero-logo-img', { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' })
+    .to('.hero-heading',  { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '-=0.4')
+    .to('.hero-sub',      { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' }, '-=0.4')
+    .to('.hero-ctas',     { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.35')
+    .to('#scrollHint',    { opacity: 1, duration: 0.5 }, '-=0.2');
+}
+
+/* ── SMOOTH SCROLL CTA ──────────────────────────────── */
+document.querySelector('a[href="#products"]').addEventListener('click', e => {
+  e.preventDefault();
+  const target = document.getElementById('slider-wrap');
+  gsap.to(window, {
+    duration: 1.2,
+    scrollTo: { y: target, offsetY: 68 },
+    ease: 'power3.inOut',
+  });
+});
+
+/* ── NAVBAR SOLID ON SCROLL ─────────────────────────── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('solid', window.scrollY > 40);
+}, { passive: true });
+
+/* ── PRODUCTS SLIDER ─────────────────────────────────── */
+let sliderIdx = 0;
+
+function renderProducts() {
+  const track = document.getElementById('slider-track');
+  const dotsEl = document.getElementById('slider-dots');
+
+  const dotsHTML = PRODUCTS.map((_, i) =>
+    `<div class="dot${i === 0 ? ' active' : ''}" data-i="${i}"></div>`
+  ).join('');
+
+  track.innerHTML = PRODUCTS.map((p, i) => `
+    <div class="slide${i === 0 ? ' active' : ''}" style="--sc:${p.color}" data-pid="${p.id}">
+      <div class="slide-bg"></div>
+      <img class="slide-img" src="${p.img}" alt="${p.name}">
+      <div class="slide-info">
+        <div class="slide-meta">
+          <span class="slide-brand-tag">Bang Legend · 150,000 Puffs</span>
+          <div class="slide-name">${p.name}</div>
+          <div class="slide-chips" style="margin-top:6px">
+            <span class="slide-chip">150K Puffs</span>
+            <span class="slide-chip">Premium</span>
+            <span class="slide-chip">Nicotine</span>
+          </div>
+        </div>
+        <div class="slide-right">
+          <div class="slide-price">70 <sub>LEI</sub></div>
+          <button class="slide-add" data-pid="${p.id}">+ ADAUGĂ ÎN COȘ</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  track.querySelectorAll('.slide-add').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      cartAdd(btn.dataset.pid);
+      btn.classList.add('popped');
+      setTimeout(() => btn.classList.remove('popped'), 500);
+    });
+  });
+
+  dotsEl.innerHTML = dotsHTML;
+  dotsEl.querySelectorAll('.dot').forEach(dot => {
+    dot.addEventListener('click', () => goSlide(+dot.dataset.i));
+  });
+
+  document.getElementById('sliderPrev').addEventListener('click', () => goSlide(sliderIdx - 1));
+  document.getElementById('sliderNext').addEventListener('click', () => goSlide(sliderIdx + 1));
+
+  // swipe
+  let tx = 0;
+  const wrap = document.getElementById('slider-wrap');
+  wrap.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  wrap.addEventListener('touchend', e => {
+    const diff = tx - e.changedTouches[0].clientX;
+    if (diff > 45) goSlide(sliderIdx + 1);
+    else if (diff < -45) goSlide(sliderIdx - 1);
+  }, { passive: true });
+
+  // keyboard
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') goSlide(sliderIdx + 1);
+    if (e.key === 'ArrowLeft')  goSlide(sliderIdx - 1);
+  });
+
+  gsap.from('#slider-wrap', {
+    scrollTrigger: { trigger: '#products', start: 'top 80%' },
+    opacity: 0, y: 40, duration: 0.7, ease: 'power2.out',
+  });
+}
+
+function goSlide(idx) {
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.dot');
+  sliderIdx = (idx + PRODUCTS.length) % PRODUCTS.length;
+  document.getElementById('slider-track').style.transform = `translateX(-${sliderIdx * 100}%)`;
+  slides.forEach((s, i) => s.classList.toggle('active', i === sliderIdx));
+  dots.forEach((d, i)   => d.classList.toggle('active', i === sliderIdx));
+}
+
+/* ── CART LOGIC ─────────────────────────────────────── */
+function cartAdd(pid) {
+  cart[pid] = (cart[pid] || 0) + 1;
+  cartRender();
+}
+
+function cartRemove(pid) {
+  delete cart[pid];
+  cartRender();
+}
+
+function cartQty(pid, delta) {
+  cart[pid] = (cart[pid] || 0) + delta;
+  if (cart[pid] <= 0) delete cart[pid];
+  cartRender();
+}
+
+window.cartRemove = cartRemove;
+window.cartQty    = cartQty;
+
+function cartRender() {
+  const entries = Object.entries(cart);
+  const total   = entries.reduce((s, [, q]) => s + q, 0);
+  const sum     = entries.reduce((s, [pid, q]) => {
+    return s + (PRODUCTS.find(p => p.id === pid)?.price ?? 0) * q;
+  }, 0);
+
+  const badge = document.getElementById('cartBadge');
+  badge.textContent = total;
+  badge.classList.toggle('show', total > 0);
+
+  const body  = document.getElementById('cartBody');
+  const foot  = document.getElementById('cartFoot');
+  const empty = document.getElementById('cartEmptyMsg');
+
+  body.querySelectorAll('.cart-line').forEach(el => el.remove());
+
+  if (entries.length === 0) {
+    empty.style.display = 'block';
+    foot.style.display  = 'none';
+    return;
+  }
+
+  empty.style.display = 'none';
+  foot.style.display  = 'flex';
+
+  const itemsHTML = entries.map(([pid, qty]) => {
+    const p = PRODUCTS.find(x => x.id === pid);
+    if (!p) return '';
+    return `
+      <div class="cart-line">
+        <img class="cart-line-img" src="${p.img}" alt="${p.name}">
+        <div class="cart-line-meta">
+          <div class="cart-line-brand">Bang Legend</div>
+          <div class="cart-line-name">${p.name}</div>
+          <div class="cart-line-qty">
+            <button class="qty-btn" onclick="cartQty('${pid}', -1)">−</button>
+            <span class="qty-num">${qty}</span>
+            <button class="qty-btn" onclick="cartQty('${pid}',  1)">+</button>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+          <div class="cart-line-price">${p.price * qty} LEI</div>
+          <button class="cart-line-del" onclick="cartRemove('${pid}')" aria-label="Elimină">✕</button>
+        </div>
+      </div>`;
+  }).join('');
+
+  body.insertAdjacentHTML('afterbegin', itemsHTML);
+
+  document.getElementById('cartTotal').textContent = sum + ' LEI';
+
+  const lines = entries.map(([pid, qty]) => {
+    const p = PRODUCTS.find(x => x.id === pid);
+    return `%E2%80%A2%20${encodeURIComponent(p.name)}%20x${qty}%20%3D%20${p.price * qty}%20lei`;
+  }).join('%0A');
+
+  const msg = `Bun%C4%83%20ziua!%20Vreau%20s%C4%83%20comand%3A%0A${lines}%0A%0ATOTAL%3A%20${sum}%20lei`;
+  document.getElementById('cartWaLink').href = `https://wa.me/40743391581?text=${msg}`;
+}
+
+/* ── CART OPEN / CLOSE ──────────────────────────────── */
+function cartOpen() {
+  document.getElementById('cart-overlay').classList.add('open');
+  document.getElementById('cart-panel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function cartClose() {
+  document.getElementById('cart-overlay').classList.remove('open');
+  document.getElementById('cart-panel').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('cartToggle').addEventListener('click', cartOpen);
+document.getElementById('cartClose').addEventListener('click', cartClose);
+document.getElementById('cart-overlay').addEventListener('click', cartClose);
+
+/* ── SCROLL ANIMATIONS ──────────────────────────────── */
+gsap.from('#about .about-body', {
+  scrollTrigger: { trigger: '#about', start: 'top 76%' },
+  opacity: 0, x: -38, duration: 0.8, ease: 'power2.out',
+});
+gsap.from('#about .features-col', {
+  scrollTrigger: { trigger: '#about', start: 'top 76%' },
+  opacity: 0, x: 38, duration: 0.8, ease: 'power2.out', delay: 0.12,
+});
+gsap.from('.feature-card', {
+  scrollTrigger: { trigger: '.features-col', start: 'top 82%' },
+  opacity: 0, y: 22, stagger: 0.1, duration: 0.5, ease: 'power2.out',
+});
+gsap.from('.stat-box', {
+  scrollTrigger: { trigger: '.stats-row', start: 'top 85%' },
+  opacity: 0, y: 20, stagger: 0.08, duration: 0.5, ease: 'power2.out',
+});
+gsap.from('.contact-left', {
+  scrollTrigger: { trigger: '#contact', start: 'top 78%' },
+  opacity: 0, x: -36, duration: 0.8, ease: 'power2.out',
+});
+gsap.from('.wa-block', {
+  scrollTrigger: { trigger: '#contact', start: 'top 78%' },
+  opacity: 0, x: 36, duration: 0.8, ease: 'power2.out', delay: 0.14,
+});
+
+/* ── AGE GATE ───────────────────────────────────────── */
+(function initAgeGate() {
+  const gate     = document.getElementById('age-gate');
+  const check    = document.getElementById('age-check');
+  const enterBtn = document.getElementById('age-enter');
+
+  document.body.style.overflow = 'hidden';
+
+  check.addEventListener('change', () => {
+    enterBtn.disabled = !check.checked;
+  });
+
+  document.getElementById('terms-link').addEventListener('click', e => {
+    e.stopPropagation();
+    document.getElementById('terms-modal').classList.add('open');
+  });
+  document.getElementById('terms-close').addEventListener('click', () => {
+    document.getElementById('terms-modal').classList.remove('open');
+  });
+  document.getElementById('terms-accept').addEventListener('click', () => {
+    document.getElementById('terms-modal').classList.remove('open');
+    check.checked = true;
+    enterBtn.disabled = false;
+  });
+
+  enterBtn.addEventListener('click', () => {
+    if (!check.checked) return;
+    gate.classList.add('hidden');
+    setTimeout(() => {
+      gate.style.display = 'none';
+      document.body.style.overflow = '';
+      startLoader();
+    }, 500);
+  });
+})();
+
+/* ── VIDEO — preload silențios, pornit din loader ────── */
+const heroVideo = document.getElementById('hero-video');
+heroVideo.load();
+
+/* ── INIT ───────────────────────────────────────────── */
+renderProducts();
+cartRender();
+</script>
+</body>
+</html>
