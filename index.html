@@ -978,6 +978,17 @@
       pointer-events: none;
     }
     .slide.active .slide-img { transform: translateX(-50%) scale(1.04); }
+    .slide-img-fill {
+      left: 0;
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      object-fit: cover;
+      object-position: center top;
+      filter: none;
+      transform: none;
+    }
+    .slide.active .slide-img-fill { transform: none; }
     .slide-info {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -1841,12 +1852,13 @@ const PRODUCTS = [
     id:       'mb',
     name:     'Mystery Box',
     img:      'poze%20produse%20finale/mistery%20box.png',
-    price:    179,
-    oldPrice: 207,
+    price:    150,
+    oldPrice: 250,
     color:    '#5B21B6',
     brand:    'Mystery Box',
     tag:      'Mystery Box · 3 Produse Random',
-    chips:    ['3 Produse', 'Flavors Random', 'Economisești 28 LEI'],
+    chips:    ['3 Produse', 'Flavors Random', 'Economisești 57 LEI'],
+    fill:     true,
   },
 ];
 
@@ -1958,7 +1970,7 @@ function renderProducts() {
   track.innerHTML = PRODUCTS.map((p, i) => `
     <div class="slide${i === 0 ? ' active' : ''}" style="--sc:${p.color}" data-pid="${p.id}">
       <div class="slide-bg"></div>
-      <div class="slide-img-wrap"><img class="slide-img" src="${p.img}" alt="${p.name}"></div>
+      <div class="slide-img-wrap"><img class="slide-img${p.fill ? ' slide-img-fill' : ''}" src="${p.img}" alt="${p.name}"></div>
       <div class="slide-info">
         <div class="slide-meta">
           <span class="slide-brand-tag">${p.tag || 'Bang Legend · 150,000 Puffs'}</span>
