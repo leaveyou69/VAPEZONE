@@ -738,7 +738,7 @@
       min-height: 580px;
       overflow: hidden;
     }
-    #hero-video {
+    #hero-vid-a, #hero-vid-b {
       position: absolute;
       inset: 0;
       width: 100%; height: 100%;
@@ -938,21 +938,21 @@
       min-height: 420px;
     }
     #slider-track {
-      display: flex;
+      position: relative;
       height: 100%;
       min-height: 380px;
-      transition: transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
     }
     .slide {
-      min-width: 100%;
-      height: 100%;
+      position: absolute;
+      inset: 0;
       min-height: 380px;
-      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      opacity: 0;
     }
+    .slide.active { opacity: 1; }
     .slide-bg {
       position: absolute;
       inset: 0;
@@ -1580,7 +1580,10 @@
 
 <!-- ──────────────── HERO ──────────────── -->
 <section id="hero">
-  <video id="hero-video" muted loop playsinline>
+  <video id="hero-vid-a" muted playsinline preload="auto">
+    <source src="HERO%20%20SECTION.mp4" type="video/mp4">
+  </video>
+  <video id="hero-vid-b" muted playsinline preload="auto" style="opacity:0">
     <source src="HERO%20%20SECTION.mp4" type="video/mp4">
   </video>
   <div id="hero-overlay"></div>
@@ -1637,7 +1640,7 @@
             <span class="stat-lbl">Flavors disponibile</span>
           </div>
           <div class="stat-box">
-            <span class="stat-val">70</span>
+            <span class="stat-val">69</span>
             <span class="stat-lbl">Lei per bucată</span>
           </div>
           <div class="stat-box">
@@ -1888,8 +1891,9 @@ const cart = {};
 
 /* ── LOADER ─────────────────────────────────────────── */
 function startLoader() {
-  heroVideo.currentTime = 0;
-  heroVideo.play().catch(() => {});
+  vidA.currentTime = 0;
+  vidA.play().catch(() => {});
+  armLoop(vidA, vidB);
   const tl = gsap.timeline({
     onComplete() {
       document.getElementById('loader').style.display = 'none';
@@ -1969,6 +1973,11 @@ function renderProducts() {
     </div>
   `).join('');
 
+  // Inițializare opacitate — doar primul slide vizibil
+  track.querySelectorAll('.slide').forEach((s, i) => {
+    if (i !== 0) gsap.set(s, { opacity: 0 });
+  });
+
   track.querySelectorAll('.slide-add').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
@@ -2009,28 +2018,38 @@ function renderProducts() {
 }
 
 function goSlide(idx) {
+  const n      = PRODUCTS.length;
   const slides = document.querySelectorAll('.slide');
   const dots   = document.querySelectorAll('.dot');
   const prevIdx = sliderIdx;
-  sliderIdx = (idx + PRODUCTS.length) % PRODUCTS.length;
-  const dir = sliderIdx > prevIdx ? 1 : -1;
+  sliderIdx = (idx + n) % n;
+  if (sliderIdx === prevIdx) return;
 
-  document.getElementById('slider-track').style.transform = `translateX(-${sliderIdx * 100}%)`;
+  const dir      = sliderIdx > prevIdx ? 1 : -1;
+  const outSlide = slides[prevIdx];
+  const inSlide  = slides[sliderIdx];
+
+  dots.forEach((d, i) => d.classList.toggle('active', i === sliderIdx));
   slides.forEach((s, i) => s.classList.toggle('active', i === sliderIdx));
-  dots.forEach((d, i)   => d.classList.toggle('active', i === sliderIdx));
 
-  const outWrap = slides[prevIdx].querySelector('.slide-img-wrap');
-  const outBg   = slides[prevIdx].querySelector('.slide-bg');
-  const inWrap  = slides[sliderIdx].querySelector('.slide-img-wrap');
-  const inBg    = slides[sliderIdx].querySelector('.slide-bg');
+  gsap.killTweensOf([outSlide, inSlide,
+    outSlide.querySelector('.slide-img-wrap'), outSlide.querySelector('.slide-bg'),
+    inSlide.querySelector('.slide-img-wrap'),  inSlide.querySelector('.slide-bg')]);
 
-  // Vape iese repede, glow-ul rămâne în urmă (senzație de adâncime)
-  gsap.to(outWrap, { x: -dir * 90, duration: 0.45, ease: 'power2.in', overwrite: true });
-  gsap.to(outBg,   { x: -dir * 25, duration: 0.6,  ease: 'power2.in', delay: 0.1, overwrite: true });
+  // Ieșire: vape pleacă rapid, lumina rămâne în urmă (mai grea, mai departe)
+  gsap.to(outSlide, { opacity: 0, duration: 0.35, ease: 'power1.in' });
+  gsap.fromTo(outSlide.querySelector('.slide-img-wrap'),
+    { x: 0 }, { x: -dir * 140, duration: 0.4, ease: 'power2.in' });
+  gsap.fromTo(outSlide.querySelector('.slide-bg'),
+    { x: 0 }, { x: dir * 35, duration: 0.5, ease: 'power1.in', delay: 0.07 });
 
-  // Vape nou intră, glow urmează cu întârziere
-  gsap.fromTo(inWrap, { x: dir * 90 }, { x: 0, duration: 0.55, ease: 'power2.out', overwrite: true });
-  gsap.fromTo(inBg,   { x: dir * 25 }, { x: 0, duration: 0.7,  ease: 'power2.out', delay: 0.12, overwrite: true });
+  // Intrare: vape vine primul, lumina îl urmează cu întârziere
+  gsap.set(inSlide, { opacity: 0 });
+  gsap.to(inSlide, { opacity: 1, duration: 0.4, ease: 'power1.out', delay: 0.08 });
+  gsap.fromTo(inSlide.querySelector('.slide-img-wrap'),
+    { x: dir * 140 }, { x: 0, duration: 0.5, ease: 'power2.out', delay: 0.05 });
+  gsap.fromTo(inSlide.querySelector('.slide-bg'),
+    { x: -dir * 35 }, { x: 0, duration: 0.6, ease: 'power1.out', delay: 0.15 });
 }
 
 /* ── WHATSAPP SMART LINK ─────────────────────────────── */
@@ -2209,9 +2228,28 @@ gsap.from('.wa-block', {
   });
 })();
 
-/* ── VIDEO — preload silențios, pornit din loader ────── */
-const heroVideo = document.getElementById('hero-video');
-heroVideo.load();
+/* ── DUAL-VIDEO SEAMLESS LOOP ────────────────────────── */
+const vidA = document.getElementById('hero-vid-a');
+const vidB = document.getElementById('hero-vid-b');
+
+function armLoop(playing, waiting) {
+  function onTick() {
+    if (!playing.duration) return;
+    if (playing.currentTime < playing.duration - 0.3) return;
+    playing.removeEventListener('timeupdate', onTick);
+    waiting.currentTime = 0;
+    waiting.play().then(() => {
+      waiting.style.opacity = '1';
+      playing.style.opacity = '0';
+      setTimeout(() => { playing.pause(); playing.currentTime = 0; }, 300);
+      armLoop(waiting, playing);
+    }).catch(() => {});
+  }
+  playing.addEventListener('timeupdate', onTick);
+}
+
+vidA.load();
+vidB.load();
 
 /* ── INIT ───────────────────────────────────────────── */
 renderProducts();
