@@ -1376,11 +1376,13 @@
       .products-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
       .product-thumb { min-height: 180px; padding: 24px 14px 18px; }
       .product-thumb img { width: 80px; }
-      .hero-ctas { flex-direction: column; gap: 10px; }
-      .btn-red, .btn-ghost { width: 100%; }
+      .hero-heading { font-size: clamp(1.8rem, 9.5vw, 2.4rem); line-height: 0.9; }
+      .hero-sub { font-size: 0.68rem; letter-spacing: 0.16em; }
+      .hero-bottom { bottom: 18px; gap: 8px; width: min(360px, 92vw); }
+      .hero-ctas { flex-direction: column; gap: 7px; }
+      .btn-red, .btn-ghost { width: 100%; padding: 11px 24px; font-size: 1rem; }
       .hero-scroll-hint { display: none; }
-      .hero-logo-img { top: 76px; width: clamp(130px, 42vw, 200px); }
-      .hero-bottom { bottom: 36px; }
+      .hero-logo-img { top: 70px; width: clamp(110px, 36vw, 180px); }
       #slider-wrap { min-height: 380px; }
       .slide-info { flex-direction: column; align-items: flex-start; padding: 36px 20px 20px; gap: 8px; }
       .slide-right { flex-direction: row; align-items: center; justify-content: space-between; width: 100%; }
@@ -1771,6 +1773,9 @@
      JAVASCRIPT
 ════════════════════════════════════════ -->
 <script>
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 /* ── DATA ─────────────────────────────────────────── */
