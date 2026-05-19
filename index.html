@@ -738,13 +738,14 @@
       min-height: 580px;
       overflow: hidden;
     }
-    #hero-video {
+    #hero-vid-a, #hero-vid-b {
       position: absolute;
       inset: 0;
       width: 100%; height: 100%;
       object-fit: cover;
       z-index: 0;
     }
+    #hero-vid-b { opacity: 0; }
     #hero-overlay {
       position: absolute;
       inset: 0;
@@ -984,7 +985,7 @@
       height: 100%;
       max-height: none;
       object-fit: cover;
-      object-position: center top;
+      object-position: center bottom;
       filter: none;
       transform: none;
     }
@@ -1591,7 +1592,10 @@
 
 <!-- ──────────────── HERO ──────────────── -->
 <section id="hero">
-  <video id="hero-video" muted loop playsinline preload="auto">
+  <video id="hero-vid-a" muted playsinline preload="auto">
+    <source src="HERO%20%20SECTION.mp4" type="video/mp4">
+  </video>
+  <video id="hero-vid-b" muted playsinline preload="auto">
     <source src="HERO%20%20SECTION.mp4" type="video/mp4">
   </video>
   <div id="hero-overlay"></div>
@@ -1911,8 +1915,10 @@ const cart = {};
 
 /* ── LOADER ─────────────────────────────────────────── */
 function startLoader() {
-  heroVideo.currentTime = 0;
-  heroVideo.play().catch(() => {});
+  vidA.currentTime = 0;
+  vidA.play().catch(() => {});
+  prewarm(vidB);
+  armLoop(vidA, vidB);
   const tl = gsap.timeline({
     onComplete() {
       document.getElementById('loader').style.display = 'none';
@@ -2245,9 +2251,57 @@ gsap.from('.wa-block', {
   });
 })();
 
-/* ── VIDEO ───────────────────────────────────────────── */
-const heroVideo = document.getElementById('hero-video');
-heroVideo.load();
+/* ── DUAL-VIDEO SEAMLESS LOOP ────────────────────────── */
+const vidA = document.getElementById('hero-vid-a');
+const vidB = document.getElementById('hero-vid-b');
+
+function prewarm(vid) {
+  vid.currentTime = 0;
+  vid.play().then(() => {
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      vid.pause();
+      vid.currentTime = 0;
+    }));
+  }).catch(() => {});
+}
+
+function armLoop(playing, waiting) {
+  let done = false;
+
+  function swap() {
+    if (done) return;
+    done = true;
+    playing.removeEventListener('timeupdate', onTick);
+    playing.removeEventListener('ended', onEnded);
+    waiting.currentTime = 0;
+
+    function onReady() {
+      waiting.removeEventListener('playing', onReady);
+      waiting.style.opacity = '1';
+      playing.style.opacity = '0';
+      setTimeout(() => {
+        playing.pause();
+        playing.currentTime = 0;
+        prewarm(playing);
+      }, 400);
+      armLoop(waiting, playing);
+    }
+
+    waiting.addEventListener('playing', onReady);
+    waiting.play().catch(() => waiting.removeEventListener('playing', onReady));
+  }
+
+  function onTick() {
+    if (playing.duration && playing.currentTime >= playing.duration - 0.3) swap();
+  }
+  function onEnded() { swap(); }
+
+  playing.addEventListener('timeupdate', onTick);
+  playing.addEventListener('ended', onEnded);
+}
+
+vidA.load();
+vidB.load();
 
 /* ── INIT ───────────────────────────────────────────── */
 renderProducts();
