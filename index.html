@@ -1028,6 +1028,21 @@
       gap: 12px;
       flex-shrink: 0;
     }
+    .slide-price-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+    }
+    .slide-price-old {
+      font-family: var(--font-cond);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--gray-l);
+      text-decoration: line-through;
+      letter-spacing: 0.06em;
+      opacity: 0.65;
+    }
     .slide-price {
       font-family: var(--font-display);
       font-size: 2.8rem;
@@ -1388,6 +1403,7 @@
       .slide-right { flex-direction: row; align-items: center; justify-content: space-between; width: 100%; }
       .slide-name { font-size: clamp(1.5rem, 7vw, 2rem); }
       .slide-price { font-size: 2.2rem; }
+      .slide-price-old { font-size: 0.88rem; }
       .slide-add { padding: 10px 16px; font-size: 1rem; }
       .slider-arrow { width: 36px; height: 36px; font-size: 0.85rem; }
       #sliderPrev { left: 8px; }
@@ -1558,7 +1574,7 @@
 
 <!-- ──────────────── HERO ──────────────── -->
 <section id="hero">
-  <video id="hero-video" muted loop playsinline>
+  <video id="hero-video" muted playsinline>
     <source src="HERO%20%20SECTION.mp4" type="video/mp4">
   </video>
   <div id="hero-overlay"></div>
@@ -1671,7 +1687,7 @@
           </div>
           <div>
             <div class="feat-title">Preț corect, fără surprize</div>
-            <div class="feat-desc">70 lei per bucată, punct. Nicio taxă de livrare, nicio comision, nicio surpriză la final.</div>
+            <div class="feat-desc">69 lei per bucată, punct. Nicio taxă de livrare, nicio comision, nicio surpriză la final.</div>
           </div>
         </div>
       </div>
@@ -1784,35 +1800,35 @@ const PRODUCTS = [
     id:    'wb',
     name:  'Watermelon Berries',
     img:   'poze%20produse%20finale/watermelon%20berries.png',
-    price: 70,
+    price: 69,
     color: '#C41E2A',
   },
   {
     id:    'br',
     name:  'Blueberry Raspberry',
     img:   'poze%20produse%20finale/blueberry%20raspberry.png',
-    price: 70,
+    price: 69,
     color: '#1E4FBF',
   },
   {
     id:    'gbg',
     name:  'Grape Bubble Gum',
     img:   'poze%20produse%20finale/grape%20bubble%20gum.png',
-    price: 70,
+    price: 69,
     color: '#7B1EC4',
   },
   {
     id:    'gl',
     name:  'Guava Lime',
     img:   'poze%20produse%20finale/guava%20lime.png',
-    price: 70,
+    price: 69,
     color: '#1EC43A',
   },
   {
     id:    'mp',
     name:  'Mango Peach',
     img:   'poze%20produse%20finale/mango%20peach.png',
-    price: 70,
+    price: 69,
     color: '#C4871E',
   },
 ];
@@ -1937,7 +1953,10 @@ function renderProducts() {
           </div>
         </div>
         <div class="slide-right">
-          <div class="slide-price">70 <sub>LEI</sub></div>
+          <div class="slide-price-wrap">
+             <div class="slide-price-old">100 LEI</div>
+             <div class="slide-price">69 <sub>LEI</sub></div>
+          </div>
           <button class="slide-add" data-pid="${p.id}">+ ADAUGĂ ÎN COȘ</button>
         </div>
       </div>
@@ -2170,6 +2189,11 @@ gsap.from('.wa-block', {
 
 /* ── VIDEO — preload silențios, pornit din loader ────── */
 const heroVideo = document.getElementById('hero-video');
+heroVideo.addEventListener('timeupdate', function() {
+  if (this.duration && this.currentTime >= this.duration - 0.25) {
+    this.currentTime = 0;
+  }
+});
 heroVideo.load();
 
 /* ── INIT ───────────────────────────────────────────── */
