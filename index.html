@@ -1696,7 +1696,7 @@
           </div>
           <div>
             <div class="feat-title">Preț corect, fără surprize</div>
-            <div class="feat-desc">69 lei per bucată, punct. Nicio taxă de livrare, nicio comision, nicio surpriză la final.</div>
+            <div class="feat-desc">69 lei per bucată, punct. Nicio taxă de livrare, niciun comision, nicio surpriză la final.</div>
           </div>
         </div>
       </div>
@@ -1840,6 +1840,17 @@ const PRODUCTS = [
     price: 69,
     color: '#C4871E',
   },
+  {
+    id:       'mb',
+    name:     'Mystery Box',
+    img:      'poze%20produse%20finale/mistery%20box.png',
+    price:    179,
+    oldPrice: 207,
+    color:    '#5B21B6',
+    brand:    'Mystery Box',
+    tag:      'Mystery Box · 3 Produse Random',
+    chips:    ['3 Produse', 'Flavors Random', 'Economisești 28 LEI'],
+  },
 ];
 
 /* ── CART STATE ────────────────────────────────────── */
@@ -1954,18 +1965,16 @@ function renderProducts() {
       <div class="slide-img-wrap"><img class="slide-img" src="${p.img}" alt="${p.name}"></div>
       <div class="slide-info">
         <div class="slide-meta">
-          <span class="slide-brand-tag">Bang Legend · 150,000 Puffs</span>
+          <span class="slide-brand-tag">${p.tag || 'Bang Legend · 150,000 Puffs'}</span>
           <div class="slide-name">${p.name}</div>
           <div class="slide-chips" style="margin-top:6px">
-            <span class="slide-chip">150K Puffs</span>
-            <span class="slide-chip">Premium</span>
-            <span class="slide-chip">Nicotine</span>
+            ${(p.chips || ['150K Puffs', 'Premium', 'Nicotine']).map(c => `<span class="slide-chip">${c}</span>`).join('')}
           </div>
         </div>
         <div class="slide-right">
           <div class="slide-price-wrap">
-             <div class="slide-price-old">100 LEI</div>
-             <div class="slide-price">69 <sub>LEI</sub></div>
+             <div class="slide-price-old">${p.oldPrice || 100} LEI</div>
+             <div class="slide-price">${p.price} <sub>LEI</sub></div>
           </div>
           <button class="slide-add" data-pid="${p.id}">+ ADAUGĂ ÎN COȘ</button>
         </div>
@@ -2235,15 +2244,22 @@ const vidB = document.getElementById('hero-vid-b');
 function armLoop(playing, waiting) {
   function onTick() {
     if (!playing.duration) return;
-    if (playing.currentTime < playing.duration - 0.3) return;
+    if (playing.currentTime < playing.duration - 1.0) return;
     playing.removeEventListener('timeupdate', onTick);
     waiting.currentTime = 0;
-    waiting.play().then(() => {
+
+    function onWaitingPlaying() {
+      waiting.removeEventListener('playing', onWaitingPlaying);
       waiting.style.opacity = '1';
       playing.style.opacity = '0';
-      setTimeout(() => { playing.pause(); playing.currentTime = 0; }, 300);
+      setTimeout(() => { playing.pause(); playing.currentTime = 0; }, 400);
       armLoop(waiting, playing);
-    }).catch(() => {});
+    }
+
+    waiting.addEventListener('playing', onWaitingPlaying);
+    waiting.play().catch(() => {
+      waiting.removeEventListener('playing', onWaitingPlaying);
+    });
   }
   playing.addEventListener('timeupdate', onTick);
 }
