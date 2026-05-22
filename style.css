@@ -1435,7 +1435,7 @@
     #promo-reveal.show { display: flex; }
     .pr-inner {
       text-align: center;
-      padding: 48px 28px 52px;
+      padding: 28px 24px 36px;
       max-width: 400px;
       width: 100%;
     }
@@ -1444,6 +1444,7 @@
       height: auto;
       margin: 0 auto 8px;
       display: block;
+      mix-blend-mode: lighten;
       filter: drop-shadow(0 0 30px rgba(196,30,58,0.5));
       animation: spartaPulse 3s ease-in-out infinite;
     }
@@ -1471,18 +1472,18 @@
     }
     .pr-pct {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 7rem;
+      font-size: 5rem;
       color: #C41E2A;
       line-height: 1;
       letter-spacing: 0.02em;
     }
     .pr-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 3.8rem;
+      font-size: 3rem;
       color: #fff;
       letter-spacing: 0.05em;
       line-height: 1;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .pr-desc {
       font-family: 'Barlow Condensed', sans-serif;
@@ -1512,9 +1513,9 @@
     .ppr-val del { opacity: 0.38; margin-right: 4px; font-size: 0.9em; }
     .ppr-val strong { color: #C41E2A; font-size: 1.1em; }
     .pr-dial-wrap {
-      margin: 0 auto 18px;
-      width: 156px;
-      height: 156px;
+      margin: 0 auto 14px;
+      width: 110px;
+      height: 110px;
       position: relative;
     }
     .pr-dial {
@@ -1543,7 +1544,7 @@
       align-items: center;
       justify-content: center;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.3rem;
+      font-size: 1rem;
       letter-spacing: 0.1em;
       color: #fff;
     }
