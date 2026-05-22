@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VapeZone — Bang Legend Pitești</title>
-  <meta name="description" content="VapeZone Pitești — Bang Legend 150K Puffs. 5 flavors premium, predare personală în Pitești. Comandă pe WhatsApp!">
+  <meta name="description" content="VapeZone Pitești — Bang Legend 150K Puffs. 5 flavors premium, comandă · ridicare · Pitești. Comandă pe WhatsApp!">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1430,9 +1430,236 @@
       a { cursor: pointer; }
       .wa-block { padding: 28px 22px; }
     }
+
+    /* ── PROMO QR ─────────────────────────────────────── */
+    #promo-reveal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(8,8,8,0.97);
+      backdrop-filter: blur(24px);
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto;
+    }
+    #promo-reveal.show { display: flex; }
+    .pr-inner {
+      text-align: center;
+      padding: 48px 28px 52px;
+      max-width: 400px;
+      width: 100%;
+    }
+    .pr-badge {
+      display: inline-block;
+      background: #C41E2A;
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      padding: 3px 12px;
+      border-radius: 3px;
+      letter-spacing: 0.15em;
+      margin-bottom: 16px;
+    }
+    .pr-sub {
+      font-family: 'Barlow', sans-serif;
+      color: rgba(255,255,255,0.45);
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    .pr-pct {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 7rem;
+      color: #C41E2A;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+    .pr-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.8rem;
+      color: #fff;
+      letter-spacing: 0.05em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .pr-desc {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.5);
+      margin: 0 0 28px;
+      line-height: 1.5;
+    }
+    .pr-dial-wrap {
+      margin: 0 auto 18px;
+      width: 156px;
+      height: 156px;
+      position: relative;
+    }
+    .pr-dial {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .pr-dial .d-bg {
+      fill: none;
+      stroke: rgba(255,255,255,0.07);
+      stroke-width: 8;
+    }
+    .pr-dial .d-arc {
+      fill: none;
+      stroke: #22c55e;
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 326.73;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear, stroke 0.6s;
+    }
+    .pr-dial-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+      color: #fff;
+    }
+    .pr-code {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.12em;
+      margin-bottom: 22px;
+    }
+    .pr-code span {
+      color: rgba(255,255,255,0.7);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+    }
+    .pr-btn {
+      display: block;
+      width: 100%;
+      max-width: 280px;
+      margin: 0 auto 12px;
+      background: #C41E2A;
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.1em;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .pr-btn:hover { background: #a3141f; transform: translateY(-2px); }
+    .pr-note {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.73rem;
+      color: rgba(255,255,255,0.22);
+    }
+    /* persistent top bar */
+    #promo-bar {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9999;
+      height: 40px;
+      background: #0d0d0d;
+      border-bottom: 1px solid rgba(196,30,42,0.4);
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      overflow: hidden;
+    }
+    #promo-bar.show { display: flex; }
+    body.promo-on #navbar     { top: 40px; }
+    body.promo-on #cart-panel { top: 40px; height: calc(100vh - 40px); }
+    .pb-chip {
+      background: #C41E2A;
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.66rem;
+      padding: 2px 7px;
+      border-radius: 2px;
+      letter-spacing: 0.12em;
+    }
+    .pb-txt {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+    }
+    .pb-txt strong { color: #fff; }
+    .pb-clock {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.98rem;
+      letter-spacing: 0.12em;
+      color: #22c55e;
+      min-width: 62px;
+      transition: color 0.6s;
+    }
+    .pb-prog {
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 2px;
+      background: #C41E2A;
+      transition: width 1s linear;
+    }
+    /* cart promo display */
+    .cart-orig-sum {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.28);
+      text-decoration: line-through;
+      text-align: right;
+      margin-bottom: 2px;
+    }
+    .cart-promo-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.82rem;
+      color: #4ade80;
+      padding: 5px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
   </style>
 </head>
 <body>
+
+<!-- ── PROMO REVEAL ── -->
+<div id="promo-reveal">
+  <div class="pr-inner">
+    <div class="pr-badge">QR EXCLUSIVE</div>
+    <p class="pr-sub">Ai câștigat</p>
+    <div class="pr-pct">-10%</div>
+    <h2 class="pr-title">REDUCERE!</h2>
+    <p class="pr-desc">Valabilă 24 ore de la activare<br>pe toată comanda ta</p>
+    <div class="pr-dial-wrap">
+      <svg class="pr-dial" viewBox="0 0 120 120">
+        <circle class="d-bg" cx="60" cy="60" r="52"/>
+        <circle class="d-arc" id="promoArc" cx="60" cy="60" r="52"/>
+      </svg>
+      <div class="pr-dial-label" id="promoRevealClock">24:00:00</div>
+    </div>
+    <p class="pr-code">COD PROMO: <span id="promoCodeReveal">—</span></p>
+    <button class="pr-btn" id="promoEnterBtn">INTRĂ PE SITE →</button>
+    <p class="pr-note">Codul apare automat în mesajul WhatsApp la comandă</p>
+  </div>
+</div>
+
+<!-- ── PROMO BAR ── -->
+<div id="promo-bar">
+  <span class="pb-chip">-10%</span>
+  <span class="pb-txt">Reducere activă &nbsp;·&nbsp; COD: <strong id="promoCodeBar">—</strong></span>
+  <span class="pb-clock" id="promoBarClock">—</span>
+  <div class="pb-prog" id="promoBarProg"></div>
+</div>
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
   <symbol id="wa-icon" viewBox="0 0 24 24">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -1572,9 +1799,16 @@
   <div class="cart-foot" id="cartFoot" style="display:none">
     <div class="cart-foot-total">
       <span class="cart-foot-label">Total</span>
-      <span class="cart-foot-sum" id="cartTotal">0 LEI</span>
+      <div style="text-align:right">
+        <div class="cart-orig-sum" id="cartOrigSum" style="display:none"></div>
+        <span class="cart-foot-sum" id="cartTotal">0 LEI</span>
+      </div>
     </div>
-    <p class="cart-delivery-note">📍 Predare personală în <span>Pitești</span> · Transport inclus</p>
+    <div class="cart-promo-row" id="cartPromoRow" style="display:none">
+      <span>Promo QR -10%</span>
+      <span id="cartPromoSave"></span>
+    </div>
+    <p class="cart-delivery-note">📍 Comandă · Ridicare · <span>Pitești</span></p>
     <p class="cart-delivery-note">🔒 În curând — <span>Plată cu cardul</span></p>
     <a id="cartWaLink" href="#" target="_blank" rel="noopener" class="cart-wa-order">
       <svg viewBox="0 0 24 24">
@@ -1599,7 +1833,7 @@
 
   <div class="hero-bottom">
     <h1 class="hero-heading">EXPERIENCE<br><em>THE LEGEND</em></h1>
-    <p class="hero-sub">5 Flavors Premium &nbsp;·&nbsp; 150,000 Puffs &nbsp;·&nbsp; Predare Personală</p>
+    <p class="hero-sub">5 Flavors Premium &nbsp;·&nbsp; 150,000 Puffs &nbsp;·&nbsp; Ridicare Pitești</p>
     <div class="hero-ctas">
       <a href="#products" class="btn-red">ALEGE AROMA</a>
       <a href="https://wa.me/40743391581" target="_blank" rel="noopener" class="btn-ghost" onclick="event.preventDefault();window.open(buildWaMsg(),'_blank')">COMANDĂ ACUM</a>
@@ -1636,7 +1870,7 @@
         <h2 class="sec-title">NU E JUST<br>UN VAPE</h2>
         <div class="divider"></div>
         <p>La <strong>VapeZone</strong> nu vindem produse — livrăm experiențe. Bang Legend 150K Puffs este alegerea celor care știu exact ce vor: flavors intense, autonomie lungă și calitate premium la fiecare puf.</p>
-        <p>Suntem din <strong>Pitești</strong> și livrăm personal, direct la tine. Nicio așteptare la curier, nicio surpriză la pachet. Simplu, rapid, de încredere.</p>
+        <p>Suntem din <strong>Pitești</strong> și livrăm direct, fără curier, fără surprize. Simplu, rapid, de încredere.</p>
         <div class="stats-row">
           <div class="stat-box">
             <span class="stat-val">150K</span>
@@ -1678,7 +1912,7 @@
             </svg>
           </div>
           <div>
-            <div class="feat-title">Predare personală Pitești</div>
+            <div class="feat-title">Ridicare · Pitești</div>
             <div class="feat-desc">Livrăm noi la tine, oriunde în Pitești. Fără curier, fără comisioane ascunse, fără zile de așteptare.</div>
           </div>
         </div>
@@ -1725,8 +1959,8 @@
         <div class="delivery-card">
           <span class="delivery-card-emoji">📍</span>
           <div class="delivery-card-txt">
-            <strong>Predare Personală</strong>
-            <span>Pitești · Transport inclus în preț</span>
+            <strong>Ridicare Pitești</strong>
+            <span>Transport inclus în preț</span>
           </div>
         </div>
 
@@ -1772,7 +2006,7 @@
 
       <div class="wa-block">
         <h3 class="wa-block-title">COMANDĂ DIRECT<br>PE WHATSAPP</h3>
-        <p class="wa-block-desc">Selectează flavors-urile din catalog, adaugă-le în coș și apasă „Comandă pe WhatsApp". Primești un mesaj pre-completat cu comanda ta — noi preluăm imediat și stabilim predarea.</p>
+        <p class="wa-block-desc">Selectează flavors-urile din catalog, adaugă-le în coș și apasă „Comandă pe WhatsApp". Primești un mesaj pre-completat cu comanda ta — noi preluăm imediat și stabilim ridicarea.</p>
         <a href="https://wa.me/40743391581" target="_blank" rel="noopener" class="wa-btn-full" onclick="event.preventDefault();window.open(buildWaMsg(),'_blank')">
           <svg viewBox="0 0 24 24">
             <use href="#wa-icon"/>
@@ -2075,14 +2309,18 @@ function buildWaMsg() {
   const entries = Object.entries(cart);
   let text;
   if (entries.length === 0) {
-    text = 'Bună ziua! Sunt interesat de produsele VapeZone 🔥 Îmi puteți da mai multe detalii despre disponibilitate și livrare?';
+    text = 'Bună ziua! Sunt interesat de produsele VapeZone 🔥 Îmi puteți da mai multe detalii despre disponibilitate și ridicare?';
   } else {
-    const sum = entries.reduce((s, [pid, q]) => s + (PRODUCTS.find(p => p.id === pid)?.price ?? 0) * q, 0);
-    const lines = entries.map(([pid, qty]) => {
+    const pData   = promoGet();
+    const disc    = pData ? 0.1 : 0;
+    const sum     = entries.reduce((s, [pid, q]) => s + (PRODUCTS.find(p => p.id === pid)?.price ?? 0) * q, 0);
+    const discSum = Math.round(sum * (1 - disc));
+    const lines   = entries.map(([pid, qty]) => {
       const p = PRODUCTS.find(x => x.id === pid);
-      return `• ${p.name} x${qty} = ${p.price * qty} lei`;
+      return `• ${p.name} x${qty} = ${Math.round(p.price * qty * (1 - disc))} lei`;
     }).join('\n');
-    text = `Bună ziua! Vreau să comand de la VapeZone:\n\n${lines}\n\nTOTAL: ${sum} lei\n\nCând putem stabili predarea?`;
+    const promoLine = pData ? `\n\n🎁 PROMO QR -10% · COD: ${pData.code}` : '';
+    text = `Bună ziua! Vreau să comand de la VapeZone:\n\n${lines}${promoLine}\n\nTOTAL: ${discSum} lei\n\nCând putem stabili ridicarea?`;
   }
   return 'https://wa.me/40743391581?text=' + encodeURIComponent(text);
 }
@@ -2149,7 +2387,7 @@ function cartRender() {
           </div>
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-          <div class="cart-line-price">${p.price * qty} LEI</div>
+          <div class="cart-line-price">${promoActive() ? `<small style="display:block;text-decoration:line-through;opacity:0.32;font-size:0.72em">${p.price * qty} LEI</small>${Math.round(p.price * qty * 0.9)}` : p.price * qty} LEI</div>
           <button class="cart-line-del" onclick="cartRemove('${pid}')" aria-label="Elimină">✕</button>
         </div>
       </div>`;
@@ -2157,14 +2395,23 @@ function cartRender() {
 
   body.insertAdjacentHTML('afterbegin', itemsHTML);
 
-  document.getElementById('cartTotal').textContent = sum + ' LEI';
+  const pData   = promoGet();
+  const discSum = pData ? Math.round(sum * 0.9) : sum;
+  document.getElementById('cartTotal').textContent = discSum + ' LEI';
+  const origEl  = document.getElementById('cartOrigSum');
+  const promoEl = document.getElementById('cartPromoRow');
+  const saveEl  = document.getElementById('cartPromoSave');
+  if (origEl)  { origEl.textContent  = sum + ' LEI'; origEl.style.display  = pData ? 'block' : 'none'; }
+  if (promoEl) { promoEl.style.display = pData ? 'flex' : 'none'; }
+  if (saveEl && pData)  saveEl.textContent = `−${sum - discSum} LEI`;
 
-  const lines = entries.map(([pid, qty]) => {
+  const disc    = pData ? 0.1 : 0;
+  const waLines = entries.map(([pid, qty]) => {
     const p = PRODUCTS.find(x => x.id === pid);
-    return `%E2%80%A2%20${encodeURIComponent(p.name)}%20x${qty}%20%3D%20${p.price * qty}%20lei`;
+    return `%E2%80%A2%20${encodeURIComponent(p.name)}%20x${qty}%20%3D%20${Math.round(p.price * qty * (1 - disc))}%20lei`;
   }).join('%0A');
-
-  const msg = `Bun%C4%83%20ziua!%20Vreau%20s%C4%83%20comand%3A%0A${lines}%0A%0ATOTAL%3A%20${sum}%20lei`;
+  const waPromo = pData ? `%0A%0A%F0%9F%8E%81%20PROMO%20QR%20-10%25%20%C2%B7%20COD%3A%20${pData.code}` : '';
+  const msg = `Bun%C4%83%20ziua!%20Vreau%20s%C4%83%20comand%3A%0A${waLines}${waPromo}%0A%0ATOTAL%3A%20${discSum}%20lei`;
   document.getElementById('cartWaLink').href = `https://wa.me/40743391581?text=${msg}`;
 }
 
@@ -2298,9 +2545,94 @@ function armLoop(playing, waiting) {
 vidA.load();
 vidB.load();
 
+/* ── PROMO QR SYSTEM ─────────────────────────────────── */
+const PROMO_KEY  = 'vz_promo_v1';
+const PROMO_MS   = 86400000;
+const PROMO_CIRC = 326.73; // 2π × 52
+
+function promoGet() {
+  try {
+    const d = JSON.parse(localStorage.getItem(PROMO_KEY) || 'null');
+    if (!d || Date.now() - d.ts > PROMO_MS) { localStorage.removeItem(PROMO_KEY); return null; }
+    return d;
+  } catch { return null; }
+}
+function promoActive()   { return promoGet() !== null; }
+function promoActivate() {
+  let d = promoGet();
+  if (!d) {
+    d = { ts: Date.now(), code: Math.random().toString(36).toUpperCase().slice(2, 8) };
+    localStorage.setItem(PROMO_KEY, JSON.stringify(d));
+  }
+  return d;
+}
+
+let _promoIv = null;
+function promoTick(data, withDial) {
+  const left  = PROMO_MS - (Date.now() - data.ts);
+  if (left <= 0) {
+    clearInterval(_promoIv);
+    localStorage.removeItem(PROMO_KEY);
+    document.getElementById('promo-reveal').classList.remove('show');
+    document.getElementById('promo-bar').classList.remove('show');
+    document.body.classList.remove('promo-on');
+    cartRender();
+    return;
+  }
+  const h     = String(Math.floor(left / 3600000)).padStart(2, '0');
+  const m     = String(Math.floor((left % 3600000) / 60000)).padStart(2, '0');
+  const s     = String(Math.floor((left % 60000) / 1000)).padStart(2, '0');
+  const t     = `${h}:${m}:${s}`;
+  const frac  = left / PROMO_MS;
+  const color = frac > 0.5 ? '#22c55e' : frac > 0.2 ? '#f59e0b' : '#ef4444';
+
+  if (withDial) {
+    const arc = document.getElementById('promoArc');
+    if (arc) { arc.style.strokeDashoffset = PROMO_CIRC * (1 - frac); arc.style.stroke = color; }
+    const rc = document.getElementById('promoRevealClock');
+    if (rc) rc.textContent = t;
+  }
+  const bc = document.getElementById('promoBarClock');
+  if (bc) { bc.textContent = t; bc.style.color = color; }
+  const bp = document.getElementById('promoBarProg');
+  if (bp) bp.style.width = (frac * 100) + '%';
+}
+
+function promoShowBar(data) {
+  document.getElementById('promoCodeBar').textContent = data.code;
+  document.getElementById('promo-bar').classList.add('show');
+  document.body.classList.add('promo-on');
+}
+
+function initPromo() {
+  const params = new URLSearchParams(window.location.search);
+  const isQR   = params.get('promo') === 'QR10';
+  if (isQR) history.replaceState({}, '', window.location.pathname);
+
+  const data = isQR ? promoActivate() : promoGet();
+  if (!data) return;
+
+  promoShowBar(data);
+  promoTick(data, isQR);
+  _promoIv = setInterval(() => promoTick(data, isQR && document.getElementById('promo-reveal').classList.contains('show')), 1000);
+
+  if (isQR) {
+    const reveal = document.getElementById('promo-reveal');
+    document.getElementById('promoCodeReveal').textContent = data.code;
+    reveal.classList.add('show');
+    document.getElementById('promoEnterBtn').addEventListener('click', () => {
+      reveal.classList.remove('show');
+      cartRender();
+    });
+  } else {
+    cartRender();
+  }
+}
+
 /* ── INIT ───────────────────────────────────────────── */
 renderProducts();
 cartRender();
+initPromo();
 </script>
 </body>
 </html>
