@@ -1487,9 +1487,29 @@
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 0.95rem;
       color: rgba(255,255,255,0.5);
-      margin: 0 0 28px;
+      margin: 0 0 20px;
       line-height: 1.5;
     }
+    .pr-price-table {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 8px;
+      padding: 14px 20px;
+      margin: 0 0 18px;
+      text-align: left;
+    }
+    .pr-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+    }
+    .pr-price-row + .pr-price-row { border-top: 1px solid rgba(255,255,255,0.06); }
+    .ppr-val del { opacity: 0.38; margin-right: 4px; font-size: 0.9em; }
+    .ppr-val strong { color: #C41E2A; font-size: 1.1em; }
     .pr-dial-wrap {
       margin: 0 auto 18px;
       width: 156px;
@@ -1635,10 +1655,19 @@
 <div id="promo-reveal">
   <div class="pr-inner">
     <div class="pr-badge">QR EXCLUSIVE</div>
-    <p class="pr-sub">Ai câștigat</p>
-    <div class="pr-pct">-10%</div>
-    <h2 class="pr-title">REDUCERE!</h2>
-    <p class="pr-desc">Valabilă 24 ore de la activare<br>pe toată comanda ta</p>
+    <p class="pr-sub">Prețuri exclusive activate</p>
+    <h2 class="pr-title">QR DEAL</h2>
+    <div class="pr-price-table">
+      <div class="pr-price-row">
+        <span class="ppr-name">Vape Bang Legend</span>
+        <span class="ppr-val"><del>69</del> → <strong>60 LEI</strong></span>
+      </div>
+      <div class="pr-price-row">
+        <span class="ppr-name">Mystery Box</span>
+        <span class="ppr-val"><del>169</del> → <strong>149 LEI</strong></span>
+      </div>
+    </div>
+    <p class="pr-desc">Valabilă 24 ore de la activare</p>
     <div class="pr-dial-wrap">
       <svg class="pr-dial" viewBox="0 0 120 120">
         <circle class="d-bg" cx="60" cy="60" r="52"/>
@@ -1654,7 +1683,7 @@
 
 <!-- ── PROMO BAR ── -->
 <div id="promo-bar">
-  <span class="pb-chip">-10%</span>
+  <span class="pb-chip">QR DEAL</span>
   <span class="pb-txt">Reducere activă &nbsp;·&nbsp; COD: <strong id="promoCodeBar">—</strong></span>
   <span class="pb-clock" id="promoBarClock">—</span>
   <div class="pb-prog" id="promoBarProg"></div>
@@ -1805,7 +1834,7 @@
       </div>
     </div>
     <div class="cart-promo-row" id="cartPromoRow" style="display:none">
-      <span>Promo QR -10%</span>
+      <span>Promo QR</span>
       <span id="cartPromoSave"></span>
     </div>
     <p class="cart-delivery-note">📍 Comandă · Ridicare · <span>Pitești</span></p>
@@ -2047,51 +2076,57 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 /* ── DATA ─────────────────────────────────────────── */
 const PRODUCTS = [
   {
-    id:    'wb',
-    name:  'Watermelon Berries',
-    img:   'poze%20produse%20finale/watermelon%20berries.png',
-    price: 69,
-    color: '#C41E2A',
+    id:         'wb',
+    name:       'Watermelon Berries',
+    img:        'poze%20produse%20finale/watermelon%20berries.png',
+    price:      69,
+    promoPrice: 60,
+    color:      '#C41E2A',
   },
   {
-    id:    'br',
-    name:  'Blueberry Raspberry',
-    img:   'poze%20produse%20finale/blueberry%20raspberry.png',
-    price: 69,
-    color: '#1E4FBF',
+    id:         'br',
+    name:       'Blueberry Raspberry',
+    img:        'poze%20produse%20finale/blueberry%20raspberry.png',
+    price:      69,
+    promoPrice: 60,
+    color:      '#1E4FBF',
   },
   {
-    id:    'gbg',
-    name:  'Grape Bubble Gum',
-    img:   'poze%20produse%20finale/grape%20bubble%20gum.png',
-    price: 69,
-    color: '#7B1EC4',
+    id:         'gbg',
+    name:       'Grape Bubble Gum',
+    img:        'poze%20produse%20finale/grape%20bubble%20gum.png',
+    price:      69,
+    promoPrice: 60,
+    color:      '#7B1EC4',
   },
   {
-    id:    'gl',
-    name:  'Guava Lime',
-    img:   'poze%20produse%20finale/guava%20lime.png',
-    price: 69,
-    color: '#1EC43A',
+    id:         'gl',
+    name:       'Guava Lime',
+    img:        'poze%20produse%20finale/guava%20lime.png',
+    price:      69,
+    promoPrice: 60,
+    color:      '#1EC43A',
   },
   {
-    id:    'mp',
-    name:  'Mango Peach',
-    img:   'poze%20produse%20finale/mango%20peach.png',
-    price: 69,
-    color: '#C4871E',
+    id:         'mp',
+    name:       'Mango Peach',
+    img:        'poze%20produse%20finale/mango%20peach.png',
+    price:      69,
+    promoPrice: 60,
+    color:      '#C4871E',
   },
   {
-    id:       'mb',
-    name:     'Mystery Box',
-    img:      'poze%20produse%20finale/mistery%20box.png',
-    price:    150,
-    oldPrice: 250,
-    color:    '#5B21B6',
-    brand:    'Mystery Box',
-    tag:      'Mystery Box · 3 Produse Random',
-    chips:    ['3 Produse', 'Flavors Random', 'Economisești 57 LEI'],
-    fill:     true,
+    id:         'mb',
+    name:       'Mystery Box',
+    img:        'poze%20produse%20finale/mistery%20box.png',
+    price:      169,
+    promoPrice: 149,
+    oldPrice:   250,
+    color:      '#5B21B6',
+    brand:      'Mystery Box',
+    tag:        'Mystery Box · 3 Produse Random',
+    chips:      ['3 Produse', 'Flavors Random', 'Economisești 81 LEI'],
+    fill:       true,
   },
 ];
 
@@ -2216,8 +2251,8 @@ function renderProducts() {
         </div>
         <div class="slide-right">
           <div class="slide-price-wrap">
-             <div class="slide-price-old">${p.oldPrice || 100} LEI</div>
-             <div class="slide-price">${p.price} <sub>LEI</sub></div>
+             <div class="slide-price-old">${promoActive() && p.promoPrice ? p.price : (p.oldPrice || 100)} LEI</div>
+             <div class="slide-price">${promoActive() && p.promoPrice ? p.promoPrice : p.price} <sub>LEI</sub></div>
           </div>
           <button class="slide-add" data-pid="${p.id}">+ ADAUGĂ ÎN COȘ</button>
         </div>
@@ -2312,14 +2347,15 @@ function buildWaMsg() {
     text = 'Bună ziua! Sunt interesat de produsele VapeZone 🔥 Îmi puteți da mai multe detalii despre disponibilitate și ridicare?';
   } else {
     const pData   = promoGet();
-    const disc    = pData ? 0.1 : 0;
     const sum     = entries.reduce((s, [pid, q]) => s + (PRODUCTS.find(p => p.id === pid)?.price ?? 0) * q, 0);
-    const discSum = Math.round(sum * (1 - disc));
+    const discSum = pData
+      ? entries.reduce((s, [pid, q]) => { const p = PRODUCTS.find(x => x.id === pid); return s + (p ? priceFor(p) : 0) * q; }, 0)
+      : sum;
     const lines   = entries.map(([pid, qty]) => {
       const p = PRODUCTS.find(x => x.id === pid);
-      return `• ${p.name} x${qty} = ${Math.round(p.price * qty * (1 - disc))} lei`;
+      return `• ${p.name} x${qty} = ${priceFor(p) * qty} lei`;
     }).join('\n');
-    const promoLine = pData ? `\n\n🎁 PROMO QR -10% · COD: ${pData.code}` : '';
+    const promoLine = pData ? `\n\n🎁 PROMO QR · COD: ${pData.code}` : '';
     text = `Bună ziua! Vreau să comand de la VapeZone:\n\n${lines}${promoLine}\n\nTOTAL: ${discSum} lei\n\nCând putem stabili ridicarea?`;
   }
   return 'https://wa.me/40743391581?text=' + encodeURIComponent(text);
@@ -2387,7 +2423,7 @@ function cartRender() {
           </div>
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-          <div class="cart-line-price">${promoActive() ? `<small style="display:block;text-decoration:line-through;opacity:0.32;font-size:0.72em">${p.price * qty} LEI</small>${Math.round(p.price * qty * 0.9)}` : p.price * qty} LEI</div>
+          <div class="cart-line-price">${promoActive() && p.promoPrice ? `<small style="display:block;text-decoration:line-through;opacity:0.32;font-size:0.72em">${p.price * qty} LEI</small>${p.promoPrice * qty}` : p.price * qty} LEI</div>
           <button class="cart-line-del" onclick="cartRemove('${pid}')" aria-label="Elimină">✕</button>
         </div>
       </div>`;
@@ -2396,7 +2432,9 @@ function cartRender() {
   body.insertAdjacentHTML('afterbegin', itemsHTML);
 
   const pData   = promoGet();
-  const discSum = pData ? Math.round(sum * 0.9) : sum;
+  const discSum = pData
+    ? entries.reduce((s, [pid, q]) => { const p = PRODUCTS.find(x => x.id === pid); return s + (p ? priceFor(p) : 0) * q; }, 0)
+    : sum;
   document.getElementById('cartTotal').textContent = discSum + ' LEI';
   const origEl  = document.getElementById('cartOrigSum');
   const promoEl = document.getElementById('cartPromoRow');
@@ -2405,12 +2443,11 @@ function cartRender() {
   if (promoEl) { promoEl.style.display = pData ? 'flex' : 'none'; }
   if (saveEl && pData)  saveEl.textContent = `−${sum - discSum} LEI`;
 
-  const disc    = pData ? 0.1 : 0;
   const waLines = entries.map(([pid, qty]) => {
     const p = PRODUCTS.find(x => x.id === pid);
-    return `%E2%80%A2%20${encodeURIComponent(p.name)}%20x${qty}%20%3D%20${Math.round(p.price * qty * (1 - disc))}%20lei`;
+    return `%E2%80%A2%20${encodeURIComponent(p.name)}%20x${qty}%20%3D%20${priceFor(p) * qty}%20lei`;
   }).join('%0A');
-  const waPromo = pData ? `%0A%0A%F0%9F%8E%81%20PROMO%20QR%20-10%25%20%C2%B7%20COD%3A%20${pData.code}` : '';
+  const waPromo = pData ? `%0A%0A%F0%9F%8E%81%20PROMO%20QR%20%C2%B7%20COD%3A%20${pData.code}` : '';
   const msg = `Bun%C4%83%20ziua!%20Vreau%20s%C4%83%20comand%3A%0A${waLines}${waPromo}%0A%0ATOTAL%3A%20${discSum}%20lei`;
   document.getElementById('cartWaLink').href = `https://wa.me/40743391581?text=${msg}`;
 }
@@ -2545,6 +2582,19 @@ function armLoop(playing, waiting) {
 vidA.load();
 vidB.load();
 
+/* ── PROMO PRICE HELPERS ─────────────────────────────── */
+function priceFor(p) { return promoActive() && p.promoPrice ? p.promoPrice : p.price; }
+
+function updateProductPrices() {
+  PRODUCTS.forEach(p => {
+    const slide = document.querySelector(`.slide[data-pid="${p.id}"]`);
+    if (!slide) return;
+    const promo  = promoActive() && p.promoPrice;
+    slide.querySelector('.slide-price-old').textContent = (promo ? p.price : (p.oldPrice || 100)) + ' LEI';
+    slide.querySelector('.slide-price').innerHTML       = (promo ? p.promoPrice : p.price) + ' <sub>LEI</sub>';
+  });
+}
+
 /* ── PROMO QR SYSTEM ─────────────────────────────────── */
 const PROMO_KEY  = 'vz_promo_v1';
 const PROMO_MS   = 86400000;
@@ -2622,9 +2672,11 @@ function initPromo() {
     reveal.classList.add('show');
     document.getElementById('promoEnterBtn').addEventListener('click', () => {
       reveal.classList.remove('show');
+      updateProductPrices();
       cartRender();
     });
   } else {
+    updateProductPrices();
     cartRender();
   }
 }
