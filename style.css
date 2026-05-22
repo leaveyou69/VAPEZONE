@@ -1397,6 +1397,21 @@
       button { cursor: pointer; }
       a { cursor: pointer; }
       .wa-block { padding: 28px 22px; }
+      #grain { display: none; }
+      #navbar { backdrop-filter: none; }
+      #navbar.solid { backdrop-filter: none; }
+      #cart-overlay { backdrop-filter: none; background: rgba(0,0,0,0.82); }
+      #promo-reveal { backdrop-filter: none; }
+      .slider-arrow { backdrop-filter: none; }
+      .slide-img { will-change: auto; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
 
     /* ── PROMO QR ─────────────────────────────────────── */

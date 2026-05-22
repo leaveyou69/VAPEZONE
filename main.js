@@ -8,7 +8,7 @@ const PRODUCTS = [
   {
     id:            'wb',
     name:          'Watermelon Berries',
-    img:           'poze%20produse%20finale/watermelon%20berries.png',
+    img:           'poze%20produse%20finale/watermelon%20berries.webp',
     price:         69,
     promoPrice:    60,
     promoOldPrice: 70,
@@ -17,7 +17,7 @@ const PRODUCTS = [
   {
     id:            'br',
     name:          'Blueberry Raspberry',
-    img:           'poze%20produse%20finale/blueberry%20raspberry.png',
+    img:           'poze%20produse%20finale/blueberry%20raspberry.webp',
     price:         69,
     promoPrice:    60,
     promoOldPrice: 70,
@@ -26,7 +26,7 @@ const PRODUCTS = [
   {
     id:            'gbg',
     name:          'Grape Bubble Gum',
-    img:           'poze%20produse%20finale/grape%20bubble%20gum.png',
+    img:           'poze%20produse%20finale/grape%20bubble%20gum.webp',
     price:         69,
     promoPrice:    60,
     promoOldPrice: 70,
@@ -35,7 +35,7 @@ const PRODUCTS = [
   {
     id:            'gl',
     name:          'Guava Lime',
-    img:           'poze%20produse%20finale/guava%20lime.png',
+    img:           'poze%20produse%20finale/guava%20lime.webp',
     price:         69,
     promoPrice:    60,
     promoOldPrice: 70,
@@ -44,7 +44,7 @@ const PRODUCTS = [
   {
     id:            'mp',
     name:          'Mango Peach',
-    img:           'poze%20produse%20finale/mango%20peach.png',
+    img:           'poze%20produse%20finale/mango%20peach.webp',
     price:         69,
     promoPrice:    60,
     promoOldPrice: 70,
@@ -54,7 +54,7 @@ const PRODUCTS = [
     id:            'mb',
     name:          'Mystery Box',
     img:           'poze%20produse%20finale/mysterybox%20landscape.webp',
-    mobileImg:     'poze%20produse%20finale/mistery%20box.png',
+    mobileImg:     'poze%20produse%20finale/mistery%20box.webp',
     price:         169,
     promoPrice:    149,
     promoOldPrice: 170,
