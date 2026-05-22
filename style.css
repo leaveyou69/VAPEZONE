@@ -417,7 +417,8 @@
       border-bottom-color: var(--border);
     }
     .nav-logo img {
-      height: 46px;
+      height: 52px;
+      width: auto;
       object-fit: contain;
       transition: filter 0.3s;
     }
@@ -1112,7 +1113,9 @@
        ABOUT SECTION
     ════════════════════════════════════════ */
     #about {
-      background: var(--bg2);
+      background:
+        linear-gradient(rgba(14,14,14,0.87), rgba(14,14,14,0.87)),
+        url('bg-graffiti.webp') center/cover;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
@@ -1432,6 +1435,18 @@
       padding: 48px 28px 52px;
       max-width: 400px;
       width: 100%;
+    }
+    .pr-sparta-logo {
+      width: 200px;
+      height: auto;
+      margin: 0 auto 8px;
+      display: block;
+      filter: drop-shadow(0 0 30px rgba(196,30,58,0.5));
+      animation: spartaPulse 3s ease-in-out infinite;
+    }
+    @keyframes spartaPulse {
+      0%, 100% { filter: drop-shadow(0 0 30px rgba(196,30,58,0.5)); }
+      50% { filter: drop-shadow(0 0 55px rgba(196,30,58,0.85)); }
     }
     .pr-badge {
       display: inline-block;

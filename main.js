@@ -622,3 +622,30 @@ function initPromo() {
 renderProducts();
 cartRender();
 initPromo();
+
+/* ── EASTER EGG ─────────────────────────────────────── */
+(function() {
+  let clicks = 0, timer = null;
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.nav-logo')) return;
+    clicks++;
+    clearTimeout(timer);
+    timer = setTimeout(() => { clicks = 0; }, 1800);
+    if (clicks >= 5) {
+      clicks = 0;
+      const el = document.createElement('img');
+      el.src = 'logo-pixel.webp';
+      el.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);width:min(320px,80vw);z-index:999999;pointer-events:none;opacity:0;transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1),opacity 0.35s';
+      document.body.appendChild(el);
+      requestAnimationFrame(() => {
+        el.style.transform = 'translate(-50%,-50%) scale(1)';
+        el.style.opacity = '1';
+        setTimeout(() => {
+          el.style.opacity = '0';
+          el.style.transform = 'translate(-50%,-50%) scale(0.8)';
+          setTimeout(() => el.remove(), 400);
+        }, 1800);
+      });
+    }
+  });
+})();
