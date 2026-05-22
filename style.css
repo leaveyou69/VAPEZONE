@@ -938,7 +938,18 @@
       transform: none;
     }
     .slide.active .slide-img-fill { transform: none; }
-    .slide-img-mobile { display: none; }
+    .slide-img-mobile {
+      display: none;
+      position: absolute;
+      inset: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transform: none;
+      filter: none;
+    }
     .slide-info {
       position: absolute;
       bottom: 0; left: 0; right: 0;
