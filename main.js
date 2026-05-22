@@ -281,7 +281,7 @@ function buildWaMsg() {
   const entries = Object.entries(cart);
   let text;
   if (entries.length === 0) {
-    text = 'Bună ziua! Sunt interesat de produsele VapeZone 🔥 Îmi puteți da mai multe detalii despre disponibilitate și ridicare?';
+    text = 'Bună ziua! Sunt interesat de produsele Gorilla Vape 🔥 Îmi puteți da mai multe detalii despre disponibilitate și ridicare?';
   } else {
     const pData   = promoGet();
     const sum     = entries.reduce((s, [pid, q]) => s + (PRODUCTS.find(p => p.id === pid)?.price ?? 0) * q, 0);
@@ -293,7 +293,7 @@ function buildWaMsg() {
       return `• ${p.name} x${qty} = ${priceFor(p) * qty} lei`;
     }).join('\n');
     const promoLine = pData ? `\n\n🎁 PROMO QR · COD: ${pData.code}` : '';
-    text = `Bună ziua! Vreau să comand de la VapeZone:\n\n${lines}${promoLine}\n\nTOTAL: ${discSum} lei\n\nCând putem stabili ridicarea?`;
+    text = `Bună ziua! Vreau să comand de la Gorilla Vape:\n\n${lines}${promoLine}\n\nTOTAL: ${discSum} lei\n\nCând putem stabili ridicarea?`;
   }
   return 'https://wa.me/40743391581?text=' + encodeURIComponent(text);
 }
