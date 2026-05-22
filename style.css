@@ -1358,6 +1358,7 @@
       .btn-red, .btn-ghost { width: 100%; padding: 11px 24px; font-size: 1rem; }
       .hero-logo-img { top: 70px; width: clamp(110px, 36vw, 180px); }
       #slider-wrap { min-height: 380px; }
+      .slide-img-fill { display: none; }
       .slide-info { align-items: flex-start; padding: 36px 20px 20px; gap: 8px; text-align: left; }
       .slide-meta { text-align: left; }
       .slide-chips { justify-content: flex-start; }
