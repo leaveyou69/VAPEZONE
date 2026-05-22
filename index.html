@@ -2576,9 +2576,7 @@ function promoActive()   { return promoGet() !== null; }
 function promoActivate() {
   let d = promoGet();
   if (!d) {
-    const ts  = Date.now();
-    const rand = Math.random().toString(36).toUpperCase().slice(2, 6);
-    d = { ts, code: 'VZ-' + ts.toString(36).toUpperCase() + '-' + rand };
+    d = { ts: Date.now(), code: Math.random().toString(36).toUpperCase().slice(2, 8) };
     localStorage.setItem(PROMO_KEY, JSON.stringify(d));
   }
   return d;
