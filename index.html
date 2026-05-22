@@ -969,10 +969,11 @@
     .slide-img {
       position: absolute;
       top: 0; left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateZ(0);
       height: 88%;
       max-height: 600px;
       object-fit: contain;
+      will-change: filter, transform;
       filter: drop-shadow(0 0 70px var(--sc));
       transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       user-select: none;
@@ -2240,7 +2241,7 @@ function renderProducts() {
   track.innerHTML = PRODUCTS.map((p, i) => `
     <div class="slide${i === 0 ? ' active' : ''}" style="--sc:${p.color}" data-pid="${p.id}">
       <div class="slide-bg"></div>
-      <div class="slide-img-wrap"><img class="slide-img${p.fill ? ' slide-img-fill' : ''}" src="${p.img}" alt="${p.name}" loading="lazy"></div>
+      <div class="slide-img-wrap"><img class="slide-img${p.fill ? ' slide-img-fill' : ''}" src="${p.img}" alt="${p.name}"${i > 0 ? ' loading="lazy"' : ''}></div>
       <div class="slide-info">
         <div class="slide-meta">
           <span class="slide-brand-tag">${p.tag || 'Bang Legend · 150,000 Puffs'}</span>
