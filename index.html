@@ -960,18 +960,20 @@
       position: absolute;
       bottom: 0; left: 0; right: 0;
       z-index: 2;
-      padding: 60px 40px 36px;
+      padding: 100px 40px 44px;
       background: linear-gradient(to top,
         rgba(6,6,6,1) 0%,
-        rgba(6,6,6,0.85) 50%,
+        rgba(6,6,6,0.9) 45%,
         transparent 100%
       );
       display: flex;
-      align-items: flex-end;
-      justify-content: flex-start;
-      gap: 48px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+      text-align: center;
     }
-    .slide-meta { flex: 0 0 auto; min-width: 0; max-width: 420px; }
+    .slide-meta { flex: 0 0 auto; min-width: 0; text-align: center; }
     .slide-brand-tag {
       font-size: 0.62rem;
       letter-spacing: 0.25em;
@@ -992,6 +994,7 @@
       gap: 6px;
       margin-top: 6px;
       flex-wrap: wrap;
+      justify-content: center;
     }
     .slide-chip {
       font-size: 0.6rem;
@@ -1005,15 +1008,15 @@
     }
     .slide-right {
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 12px;
+      flex-direction: row;
+      align-items: center;
+      gap: 24px;
       flex-shrink: 0;
     }
     .slide-price-wrap {
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
+      align-items: center;
       gap: 2px;
     }
     .slide-price-old {
@@ -1373,8 +1376,11 @@
       .btn-red, .btn-ghost { width: 100%; padding: 11px 24px; font-size: 1rem; }
       .hero-logo-img { top: 70px; width: clamp(110px, 36vw, 180px); }
       #slider-wrap { min-height: 380px; }
-      .slide-info { flex-direction: column; align-items: flex-start; padding: 36px 20px 20px; gap: 8px; }
+      .slide-info { align-items: flex-start; padding: 36px 20px 20px; gap: 8px; text-align: left; }
+      .slide-meta { text-align: left; }
+      .slide-chips { justify-content: flex-start; }
       .slide-right { flex-direction: row; align-items: center; justify-content: space-between; width: 100%; }
+      .slide-price-wrap { align-items: flex-start; }
       .slide-name { font-size: clamp(1.5rem, 7vw, 2rem); }
       .slide-price { font-size: 2.2rem; }
       .slide-price-old { font-size: 0.88rem; }
