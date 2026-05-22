@@ -1661,11 +1661,11 @@
     <div class="pr-price-table">
       <div class="pr-price-row">
         <span class="ppr-name">Vape Bang Legend</span>
-        <span class="ppr-val"><del>69</del> → <strong>60 LEI</strong></span>
+        <span class="ppr-val"><del>70</del> → <strong>60 LEI</strong></span>
       </div>
       <div class="pr-price-row">
         <span class="ppr-name">Mystery Box</span>
-        <span class="ppr-val"><del>169</del> → <strong>149 LEI</strong></span>
+        <span class="ppr-val"><del>170</del> → <strong>149 LEI</strong></span>
       </div>
     </div>
     <p class="pr-desc">Valabilă 24 ore de la activare</p>
@@ -2077,57 +2077,63 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 /* ── DATA ─────────────────────────────────────────── */
 const PRODUCTS = [
   {
-    id:         'wb',
-    name:       'Watermelon Berries',
-    img:        'poze%20produse%20finale/watermelon%20berries.png',
-    price:      69,
-    promoPrice: 60,
-    color:      '#C41E2A',
+    id:            'wb',
+    name:          'Watermelon Berries',
+    img:           'poze%20produse%20finale/watermelon%20berries.png',
+    price:         69,
+    promoPrice:    60,
+    promoOldPrice: 70,
+    color:         '#C41E2A',
   },
   {
-    id:         'br',
-    name:       'Blueberry Raspberry',
-    img:        'poze%20produse%20finale/blueberry%20raspberry.png',
-    price:      69,
-    promoPrice: 60,
-    color:      '#1E4FBF',
+    id:            'br',
+    name:          'Blueberry Raspberry',
+    img:           'poze%20produse%20finale/blueberry%20raspberry.png',
+    price:         69,
+    promoPrice:    60,
+    promoOldPrice: 70,
+    color:         '#1E4FBF',
   },
   {
-    id:         'gbg',
-    name:       'Grape Bubble Gum',
-    img:        'poze%20produse%20finale/grape%20bubble%20gum.png',
-    price:      69,
-    promoPrice: 60,
-    color:      '#7B1EC4',
+    id:            'gbg',
+    name:          'Grape Bubble Gum',
+    img:           'poze%20produse%20finale/grape%20bubble%20gum.png',
+    price:         69,
+    promoPrice:    60,
+    promoOldPrice: 70,
+    color:         '#7B1EC4',
   },
   {
-    id:         'gl',
-    name:       'Guava Lime',
-    img:        'poze%20produse%20finale/guava%20lime.png',
-    price:      69,
-    promoPrice: 60,
-    color:      '#1EC43A',
+    id:            'gl',
+    name:          'Guava Lime',
+    img:           'poze%20produse%20finale/guava%20lime.png',
+    price:         69,
+    promoPrice:    60,
+    promoOldPrice: 70,
+    color:         '#1EC43A',
   },
   {
-    id:         'mp',
-    name:       'Mango Peach',
-    img:        'poze%20produse%20finale/mango%20peach.png',
-    price:      69,
-    promoPrice: 60,
-    color:      '#C4871E',
+    id:            'mp',
+    name:          'Mango Peach',
+    img:           'poze%20produse%20finale/mango%20peach.png',
+    price:         69,
+    promoPrice:    60,
+    promoOldPrice: 70,
+    color:         '#C4871E',
   },
   {
-    id:         'mb',
-    name:       'Mystery Box',
-    img:        'poze%20produse%20finale/mistery%20box.png',
-    price:      169,
-    promoPrice: 149,
-    oldPrice:   250,
-    color:      '#5B21B6',
-    brand:      'Mystery Box',
-    tag:        'Mystery Box · 3 Produse Random',
-    chips:      ['3 Produse', 'Flavors Random', 'Economisești 81 LEI'],
-    fill:       true,
+    id:            'mb',
+    name:          'Mystery Box',
+    img:           'poze%20produse%20finale/mistery%20box.png',
+    price:         169,
+    promoPrice:    149,
+    promoOldPrice: 170,
+    oldPrice:      250,
+    color:         '#5B21B6',
+    brand:         'Mystery Box',
+    tag:           'Mystery Box · 3 Produse Random',
+    chips:         ['3 Produse', 'Flavors Random', 'Economisești 81 LEI'],
+    fill:          true,
   },
 ];
 
@@ -2252,7 +2258,7 @@ function renderProducts() {
         </div>
         <div class="slide-right">
           <div class="slide-price-wrap">
-             <div class="slide-price-old">${promoActive() && p.promoPrice ? p.price : (p.oldPrice || 100)} LEI</div>
+             <div class="slide-price-old">${promoActive() && p.promoPrice ? (p.promoOldPrice || p.price) : (p.oldPrice || 100)} LEI</div>
              <div class="slide-price">${promoActive() && p.promoPrice ? p.promoPrice : p.price} <sub>LEI</sub></div>
           </div>
           <button class="slide-add" data-pid="${p.id}">+ ADAUGĂ ÎN COȘ</button>
@@ -2591,7 +2597,7 @@ function updateProductPrices() {
     const slide = document.querySelector(`.slide[data-pid="${p.id}"]`);
     if (!slide) return;
     const promo  = promoActive() && p.promoPrice;
-    slide.querySelector('.slide-price-old').textContent = (promo ? p.price : (p.oldPrice || 100)) + ' LEI';
+    slide.querySelector('.slide-price-old').textContent = (promo ? (p.promoOldPrice || p.price) : (p.oldPrice || 100)) + ' LEI';
     slide.querySelector('.slide-price').innerHTML       = (promo ? p.promoPrice : p.price) + ' <sub>LEI</sub>';
   });
 }
