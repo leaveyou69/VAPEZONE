@@ -177,7 +177,7 @@ function renderProducts() {
   track.innerHTML = PRODUCTS.map((p, i) => `
     <div class="slide${i === 0 ? ' active' : ''}" style="--sc:${p.color}" data-pid="${p.id}">
       <div class="slide-bg"></div>
-      <div class="slide-img-wrap">${p.img ? `<img class="slide-img${p.fill ? ' slide-img-fill' : ''}" src="${p.img}" alt="${p.name}"${i > 0 ? ' loading="lazy"' : ''} onerror="this.style.display='none'">` : ''}${p.mobileImg ? `<img class="slide-img slide-img-mobile" src="${p.mobileImg}" alt="${p.name}" loading="lazy">` : ''}</div>
+      <div class="slide-img-wrap">${p.img ? `<img class="slide-img${p.fill ? ' slide-img-fill' : ''}" src="${p.img}" alt="${p.name}"${i > 0 ? ' loading="lazy"' : ''} onerror="this.style.display='none'">` : ''}${p.mobileImg ? `<img class="slide-img-mobile" src="${p.mobileImg}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">` : ''}</div>
       <div class="slide-info">
         <div class="slide-meta">
           <span class="slide-brand-tag">${p.tag || 'Bang Legend · 150,000 Puffs'}</span>
