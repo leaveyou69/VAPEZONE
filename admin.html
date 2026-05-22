@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VapeZone Admin — Verificare Coduri</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #080808;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .box {
+      background: #0e0e0e;
+      border: 1px solid rgba(196,30,58,0.3);
+      border-radius: 16px;
+      padding: 40px 36px;
+      max-width: 460px;
+      width: 100%;
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: #C41E2A;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .subtitle {
+      font-size: 0.75rem;
+      color: #555;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    label {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      color: #666;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    input {
+      width: 100%;
+      background: #151515;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 14px 16px;
+      color: #fff;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      font-family: monospace;
+      text-transform: uppercase;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus { border-color: rgba(196,30,58,0.5); }
+    button {
+      width: 100%;
+      margin-top: 14px;
+      background: #C41E2A;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover { background: #a3141f; }
+
+    #result {
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: 10px;
+      display: none;
+    }
+    #result.valid {
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.3);
+    }
+    #result.expired {
+      background: rgba(196,30,58,0.08);
+      border: 1px solid rgba(196,30,58,0.3);
+    }
+    #result.invalid {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .res-status {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .valid  .res-status { color: #22c55e; }
+    .expired .res-status { color: #C41E2A; }
+    .invalid .res-status { color: #888; }
+    .res-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #999;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .res-row:last-child { border-bottom: none; }
+    .res-row span:last-child { color: #ddd; font-weight: 600; }
+    .valid  .res-row span:last-child { color: #86efac; }
+    .note {
+      margin-top: 28px;
+      font-size: 0.72rem;
+      color: #333;
+      letter-spacing: 0.06em;
+      text-align: center;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+<div class="box">
+  <div class="logo">VapeZone</div>
+  <div class="subtitle">Verificare Coduri Promo</div>
+
+  <label>Cod promo (din mesajul WhatsApp)</label>
+  <input type="text" id="codeInput" placeholder="VZ-XXXXXXXX-XXXX" autocomplete="off" spellcheck="false">
+  <button onclick="verify()">VERIFICĂ</button>
+
+  <div id="result"></div>
+
+  <p class="note">Codul apare automat în mesajul WhatsApp al clientului.<br>Valabilitate: 24 ore de la activare (scanare QR).</p>
+</div>
+
+<script>
+  const PROMO_MS = 86400000; // 24h
+
+  document.getElementById('codeInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') verify();
+  });
+
+  function verify() {
+    const raw  = document.getElementById('codeInput').value.trim().toUpperCase();
+    const res  = document.getElementById('result');
+
+    // Expected format: VZ-<base36_timestamp>-<4rand>
+    const parts = raw.split('-');
+    if (parts.length !== 3 || parts[0] !== 'VZ') {
+      res.style.display = 'block';
+      res.className = 'invalid';
+      res.innerHTML = `<div class="res-status">Cod invalid</div>
+        <div class="res-row"><span>Format</span><span>Nerecunoscut</span></div>
+        <div class="res-row"><span>Așteptat</span><span>VZ-XXXXXXXX-XXXX</span></div>`;
+      return;
+    }
+
+    const tsBase36 = parts[1];
+    const ts = parseInt(tsBase36, 36);
+
+    if (isNaN(ts) || ts < 1700000000000 || ts > Date.now() + 60000) {
+      res.style.display = 'block';
+      res.className = 'invalid';
+      res.innerHTML = `<div class="res-status">Cod invalid</div>
+        <div class="res-row"><span>Timestamp</span><span>Imposibil de decodat</span></div>`;
+      return;
+    }
+
+    const now       = Date.now();
+    const elapsed   = now - ts;
+    const remaining = PROMO_MS - elapsed;
+    const isValid   = remaining > 0;
+
+    const activatedAt = new Date(ts).toLocaleString('ro-RO', {
+      day: '2-digit', month: '2-digit', year: 'numeric',
+      hour: '2-digit', minute: '2-digit', second: '2-digit'
+    });
+
+    const expiresAt = new Date(ts + PROMO_MS).toLocaleString('ro-RO', {
+      day: '2-digit', month: '2-digit', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+
+    const elapsedH = Math.floor(elapsed / 3600000);
+    const elapsedM = Math.floor((elapsed % 3600000) / 60000);
+
+    let remainTxt;
+    if (isValid) {
+      const rh = Math.floor(remaining / 3600000);
+      const rm = Math.floor((remaining % 3600000) / 60000);
+      remainTxt = `${rh}h ${rm}m`;
+    } else {
+      const ago = Math.abs(Math.floor(remaining / 3600000));
+      remainTxt = `Expirat acum ${ago}h`;
+    }
+
+    res.style.display = 'block';
+    res.className = isValid ? 'valid' : 'expired';
+    res.innerHTML = `
+      <div class="res-status">${isValid ? '✓ COD VALID — APLICĂ REDUCEREA' : '✕ COD EXPIRAT — REFUZĂ REDUCEREA'}</div>
+      <div class="res-row"><span>Cod</span><span>${raw}</span></div>
+      <div class="res-row"><span>Activat la</span><span>${activatedAt}</span></div>
+      <div class="res-row"><span>Expiră la</span><span>${expiresAt}</span></div>
+      <div class="res-row"><span>Timp trecut</span><span>${elapsedH}h ${elapsedM}m</span></div>
+      <div class="res-row"><span>Status</span><span>${remainTxt}</span></div>
+    `;
+  }
+</script>
+</body>
+</html>
