@@ -751,7 +751,9 @@
       width: clamp(150px, 38vw, 250px);
       filter: drop-shadow(0 0 50px rgba(139,26,26,0.55));
       opacity: 0;
+      transition: top 0.3s ease;
     }
+    body.promo-on .hero-logo-img { top: 128px; }
     .hero-bottom {
       position: absolute;
       bottom: 44px;
@@ -1378,6 +1380,7 @@
       .hero-ctas { flex-direction: column; gap: 7px; }
       .btn-red, .btn-ghost { width: 100%; padding: 11px 24px; font-size: 1rem; }
       .hero-logo-img { top: 70px; width: clamp(110px, 36vw, 180px); }
+      body.promo-on .hero-logo-img { top: 110px; }
       #slider-wrap { min-height: 380px; }
       .slide-img-fill { display: none; }
       .slide-img-mobile { display: block; }
