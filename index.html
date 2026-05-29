@@ -17,13 +17,37 @@
   <noscript><link rel="stylesheet" href="style.css"></noscript>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{background:#080808;color:#fff;overflow-x:hidden}
-    #promo-reveal{display:none}
-    #promo-bar{display:none}
-    #terms-modal{display:none}
+    body{background:#080808;color:#fff;overflow-x:hidden;font-family:'Barlow Condensed',sans-serif;cursor:none}
+    a{text-decoration:none;color:inherit}button{cursor:none}img{display:block}
+    #promo-reveal,#promo-bar,#terms-modal{display:none}
     #age-gate{position:fixed;inset:0;z-index:99995;display:flex;align-items:center;justify-content:center;padding:20px}
-    #age-gate-bg{position:absolute;inset:0;background:#020202}
-    #age-box{position:relative;z-index:1;background:#0e0e0e;border:1px solid rgba(196,30,58,0.35);border-radius:16px;padding:44px 40px 36px;max-width:480px;width:100%;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
+    #age-gate-bg{position:absolute;inset:0;background:#020202;background-image:radial-gradient(ellipse at 30% 50%,rgba(139,26,26,0.18) 0%,transparent 60%),radial-gradient(ellipse at 70% 50%,rgba(139,26,26,0.12) 0%,transparent 60%)}
+    #age-box{position:relative;z-index:1;background:#0e0e0e;border:1px solid rgba(196,30,58,0.35);border-radius:16px;padding:44px 40px 36px;max-width:480px;width:100%;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;box-shadow:0 0 80px rgba(139,26,26,0.2)}
+    #age-logo{width:160px;filter:drop-shadow(0 0 20px rgba(139,26,26,0.5));mix-blend-mode:lighten}
+    #age-warning-label{font-weight:700;font-size:0.75rem;letter-spacing:0.35em;color:#C41E3A;text-transform:uppercase;background:rgba(196,30,58,0.1);border:1px solid rgba(196,30,58,0.3);border-radius:99px;padding:5px 16px}
+    #age-title{font-family:'Bebas Neue',cursive;font-size:clamp(2.2rem,8vw,3.2rem);line-height:0.95;letter-spacing:0.04em;color:#C41E3A;text-shadow:0 0 40px rgba(196,30,58,0.4)}
+    #age-sub{font-family:'Barlow',sans-serif;font-size:0.92rem;color:#999;line-height:1.7;max-width:360px}
+    #age-sub strong{color:#fff}
+    #age-check-label{display:flex;align-items:flex-start;gap:12px;cursor:pointer;text-align:left;padding:16px 18px;background:#151515;border:1px solid rgba(255,255,255,0.06);border-radius:10px;width:100%}
+    #age-check{display:none}
+    #age-check-box{width:20px;height:20px;border:1.5px solid #555;border-radius:5px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center}
+    #age-check-box::after{content:'✓';font-size:0.75rem;color:#fff;opacity:0}
+    #age-check:checked+#age-check-box{background:#C41E3A;border-color:#C41E3A}
+    #age-check:checked+#age-check-box::after{opacity:1}
+    #age-check-text{font-family:'Barlow',sans-serif;font-size:0.85rem;color:#999;line-height:1.55}
+    #age-check-text strong{color:#fff}
+    #age-enter{width:100%;background:#C41E3A;color:#fff;border:none;border-radius:8px;padding:16px;font-family:'Bebas Neue',cursive;font-size:1.4rem;letter-spacing:0.08em;opacity:0.35;cursor:not-allowed}
+    #age-enter:not(:disabled){opacity:1;cursor:none}
+    #age-exit{font-size:0.78rem;letter-spacing:0.15em;color:#555;text-transform:uppercase}
+    #age-gate.hidden{opacity:0;pointer-events:none;transition:opacity 0.5s}
+    @media(max-width:720px){
+      #age-box{padding:24px 20px 20px;gap:12px}
+      #age-logo{width:130px}
+      #age-title{font-size:clamp(1.6rem,9vw,2.2rem)}
+      #age-sub{font-size:0.82rem}
+      #age-check-label{padding:12px 14px}
+      #age-enter{padding:13px;font-size:1.2rem}
+    }
   </style>
 
 </head>
