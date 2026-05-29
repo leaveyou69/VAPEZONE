@@ -73,7 +73,7 @@
       box-shadow: 0 0 80px rgba(139,26,26,0.2), 0 0 0 1px rgba(196,30,58,0.1);
     }
     #age-logo {
-      width: 110px;
+      width: 160px;
       filter: drop-shadow(0 0 20px rgba(139,26,26,0.5));
       mix-blend-mode: lighten;
     }
