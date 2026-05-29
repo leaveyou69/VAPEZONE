@@ -15,6 +15,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="style.css"></noscript>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:#080808;color:#fff;overflow-x:hidden}
+    #promo-reveal{display:none}
+    #promo-bar{display:none}
+    #terms-modal{display:none}
+    #age-gate{position:fixed;inset:0;z-index:99995;display:flex;align-items:center;justify-content:center;padding:20px}
+    #age-gate-bg{position:absolute;inset:0;background:#020202}
+    #age-box{position:relative;z-index:1;background:#0e0e0e;border:1px solid rgba(196,30,58,0.35);border-radius:16px;padding:44px 40px 36px;max-width:480px;width:100%;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
+  </style>
 
 </head>
 <body>
@@ -217,7 +227,7 @@
     <source src="HERO_opt.mp4" type="video/mp4">
   </video>
   <div id="hero-overlay"></div>
-  <img class="hero-logo-img" src="logo-main.webp" alt="Gorilla Vape" width="250" height="250">
+  <img class="hero-logo-img" src="logo-main.webp" alt="Gorilla Vape" width="250">
   <div class="hero-bottom">
     <h1 class="hero-heading">EXPERIENCE<br><em>THE LEGEND</em></h1>
     <p class="hero-sub">5 Flavors Premium &nbsp;·&nbsp; 150,000 Puffs &nbsp;·&nbsp; Ridicare Pitești</p>
