@@ -1364,7 +1364,7 @@
     @media (max-width: 720px) {
       #age-gate { padding: 12px; align-items: center; padding-top: max(16px, env(safe-area-inset-top)); overflow-y: auto; }
       #age-box { padding: 24px 20px 20px; gap: 12px; max-height: none; }
-      #age-logo { width: 68px; }
+      #age-logo { width: 130px; }
       #age-title { font-size: clamp(1.6rem, 9vw, 2.2rem); }
       #age-sub { font-size: 0.82rem; }
       #age-check-label { padding: 12px 14px; }
