@@ -10,10 +10,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preload" as="image" href="hero-poster.webp" fetchpriority="high">
   <link rel="preload" as="image" href="logo-main.webp" fetchpriority="high">
   <link rel="preload" as="image" href="poze%20produse%20finale/watermelon%20berries.webp" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600&display=optional" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css"></noscript>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
@@ -213,10 +215,10 @@
 <!-- ──────────────── HERO ──────────────── -->
 <section id="hero">
   <video id="hero-vid-a" muted playsinline preload="auto" fetchpriority="high" poster="hero-poster.webp">
-    <source src="HERO%20%20SECTION_opt.mp4" type="video/mp4">
+    <source src="HERO_opt.mp4" type="video/mp4">
   </video>
   <video id="hero-vid-b" muted playsinline preload="none" poster="hero-poster.webp">
-    <source src="HERO%20%20SECTION_opt.mp4" type="video/mp4">
+    <source src="HERO_opt.mp4" type="video/mp4">
   </video>
   <div id="hero-overlay"></div>
   <img class="hero-logo-img" src="logo-main.webp" alt="Gorilla Vape">
