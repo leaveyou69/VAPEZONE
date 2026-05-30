@@ -194,8 +194,11 @@ function renderProducts() {
           <span class="slide-brand-tag">${p.tag || 'Bang Legend · 150,000 Puffs'}</span>
           <div class="slide-name">${p.name}</div>
           ${p.flavors ? `
-          <div class="slide-flavors">
-            ${p.flavors.map(f => `<button class="flavor-chip${f === selectedFlavors[p.id] ? ' active' : ''}" data-pid="${p.id}" data-flavor="${f}">${f}</button>`).join('')}
+          <div class="slide-flavors-wrap">
+            <span class="slide-flavors-label">3 arome disponibile</span>
+            <div class="slide-flavors">
+              ${p.flavors.map(f => `<button class="flavor-chip${f === selectedFlavors[p.id] ? ' active' : ''}" data-pid="${p.id}" data-flavor="${f}">${f}</button>`).join('')}
+            </div>
           </div>
           ` : `<div class="slide-chips">${(p.chips || ['150K Puffs', 'Premium', 'Nicotine']).map(c => `<span class="slide-chip">${c}</span>`).join('')}</div>`}
           ${p.stock !== undefined ? `<div class="slide-stock${p.stock <= 2 ? ' slide-stock--low' : ''}">${p.stock <= 2 ? `⚠ Ultimele ${p.stock} bucăți!` : `Stoc: ${p.stock} buc`}</div>` : ''}
