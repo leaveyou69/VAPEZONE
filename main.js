@@ -326,7 +326,7 @@ function buildWaMsg() {
     const promoLine = pData ? `\n\n🎁 PROMO QR · COD: ${pData.code}` : '';
     text = `Bună ziua! Vreau să comand de la Gorilla Vape:\n\n${lines}${promoLine}\n\nTOTAL: ${discSum} lei\n\nCând putem stabili livrarea?`;
   }
-  return 'https://wa.me/40743391581?text=' + encodeURIComponent(text);
+  return 'https://wa.me/40735741591?text=' + encodeURIComponent(text);
 }
 
 /* ── CART LOGIC ─────────────────────────────────────── */
@@ -417,7 +417,7 @@ function cartRender() {
   }).join('%0A');
   const waPromo = pData ? `%0A%0A%F0%9F%8E%81%20PROMO%20QR%20%C2%B7%20COD%3A%20${pData.code}` : '';
   const msg = `Bun%C4%83%20ziua!%20Vreau%20s%C4%83%20comand%3A%0A${waLines}${waPromo}%0A%0ATOTAL%3A%20${discSum}%20lei`;
-  document.getElementById('cartWaLink').href = `https://wa.me/40743391581?text=${msg}`;
+  document.getElementById('cartWaLink').href = `https://wa.me/40735741591?text=${msg}`;
 }
 
 /* ── CART OPEN / CLOSE ──────────────────────────────── */
