@@ -191,7 +191,7 @@ function renderProducts() {
       <div class="slide-img-wrap">${p.img ? `<img class="slide-img${p.fill ? ' slide-img-fill' : ''}" src="${p.img}" alt="${p.name}"${i > 0 ? ' loading="lazy"' : ''} onerror="this.style.display='none'">` : ''}${p.mobileImg ? `<img class="slide-img-mobile" src="${p.mobileImg}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">` : ''}</div>
       ${p.flavors ? `
       <div class="slide-flavors-top">
-        <span class="slide-flavors-label">3 arome disponibile</span>
+        <span class="slide-flavors-label">Disponibil în 3 arome</span>
         <div class="slide-flavors">
           ${p.flavors.map(f => `<button class="flavor-chip${f === selectedFlavors[p.id] ? ' active' : ''}" data-pid="${p.id}" data-flavor="${f}">${f}</button>`).join('')}
         </div>
