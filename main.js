@@ -13,6 +13,8 @@ const PRODUCTS = [
     promoPrice:    60,
     promoOldPrice: 70,
     color:         '#1E4FBF',
+    stock:         7,
+    flavors:       ['Blueberry Raspberry', 'Blueberry Ice', 'Blueberry Cranberry Cherry'],
   },
   {
     id:            'gbg',
@@ -22,6 +24,8 @@ const PRODUCTS = [
     promoPrice:    60,
     promoOldPrice: 70,
     color:         '#7B1EC4',
+    stock:         1,
+    flavors:       ['Grape Ice', 'Grape Bubble Gum', 'Raspberry Grapes'],
   },
   {
     id:            'gl',
@@ -31,6 +35,8 @@ const PRODUCTS = [
     promoPrice:    60,
     promoOldPrice: 70,
     color:         '#1EC43A',
+    stock:         8,
+    flavors:       ['Guava Lime', 'Passionate Passion Fruit', 'Passion Fruit Lemon'],
   },
   {
     id:            'mp',
@@ -40,6 +46,8 @@ const PRODUCTS = [
     promoPrice:    60,
     promoOldPrice: 70,
     color:         '#C4871E',
+    stock:         8,
+    flavors:       ['Mango Peach', 'Peach Ice', 'Blueberry Peach'],
   },
   {
     id:            'mb',
@@ -70,6 +78,8 @@ const PRODUCTS = [
 
 /* ── CART STATE ────────────────────────────────────── */
 const cart = {};
+const selectedFlavors = {};
+PRODUCTS.forEach(p => { if (p.flavors) selectedFlavors[p.id] = p.flavors[0]; });
 
 /* ── GRAIN GENERATOR ──────────────────────────────── */
 (function generateGrain() {
@@ -183,9 +193,12 @@ function renderProducts() {
         <div class="slide-meta">
           <span class="slide-brand-tag">${p.tag || 'Bang Legend · 150,000 Puffs'}</span>
           <div class="slide-name">${p.name}</div>
-          <div class="slide-chips">
-            ${(p.chips || ['150K Puffs', 'Premium', 'Nicotine']).map(c => `<span class="slide-chip">${c}</span>`).join('')}
+          ${p.flavors ? `
+          <div class="slide-flavors">
+            ${p.flavors.map(f => `<button class="flavor-chip${f === selectedFlavors[p.id] ? ' active' : ''}" data-pid="${p.id}" data-flavor="${f}">${f}</button>`).join('')}
           </div>
+          ` : `<div class="slide-chips">${(p.chips || ['150K Puffs', 'Premium', 'Nicotine']).map(c => `<span class="slide-chip">${c}</span>`).join('')}</div>`}
+          ${p.stock !== undefined ? `<div class="slide-stock${p.stock <= 2 ? ' slide-stock--low' : ''}">${p.stock <= 2 ? `⚠ Ultimele ${p.stock} bucăți!` : `Stoc: ${p.stock} buc`}</div>` : ''}
         </div>
         <div class="slide-right">
           <div class="slide-price-wrap">
@@ -212,6 +225,16 @@ function renderProducts() {
       cartAdd(btn.dataset.pid);
       btn.classList.add('popped');
       setTimeout(() => btn.classList.remove('popped'), 500);
+    });
+  });
+
+  track.querySelectorAll('.flavor-chip').forEach(chip => {
+    chip.addEventListener('click', e => {
+      e.stopPropagation();
+      const pid = chip.dataset.pid;
+      selectedFlavors[pid] = chip.dataset.flavor;
+      track.querySelectorAll(`.flavor-chip[data-pid="${pid}"]`).forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
     });
   });
 
@@ -294,7 +317,8 @@ function buildWaMsg() {
       : sum;
     const lines   = entries.map(([pid, qty]) => {
       const p = PRODUCTS.find(x => x.id === pid);
-      return `• ${p.name} x${qty} = ${priceFor(p) * qty} lei`;
+      const flavor = selectedFlavors[pid] ? ` (${selectedFlavors[pid]})` : '';
+      return `• ${p.name}${flavor} x${qty} = ${priceFor(p) * qty} lei`;
     }).join('\n');
     const promoLine = pData ? `\n\n🎁 PROMO QR · COD: ${pData.code}` : '';
     text = `Bună ziua! Vreau să comand de la Gorilla Vape:\n\n${lines}${promoLine}\n\nTOTAL: ${discSum} lei\n\nCând putem stabili ridicarea?`;
