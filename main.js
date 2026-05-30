@@ -189,16 +189,16 @@ function renderProducts() {
     <div class="slide${i === 0 ? ' active' : ''}" style="--sc:${p.color}" data-pid="${p.id}">
       <div class="slide-bg"></div>
       <div class="slide-img-wrap">${p.img ? `<img class="slide-img${p.fill ? ' slide-img-fill' : ''}" src="${p.img}" alt="${p.name}"${i > 0 ? ' loading="lazy"' : ''} onerror="this.style.display='none'">` : ''}${p.mobileImg ? `<img class="slide-img-mobile" src="${p.mobileImg}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">` : ''}</div>
-      ${p.flavors ? `
-      <div class="slide-flavors-top">
-        <span class="slide-flavors-label">3 arome disponibile</span>
-        <div class="slide-flavors">
-          ${p.flavors.map(f => `<button class="flavor-chip${f === selectedFlavors[p.id] ? ' active' : ''}" data-pid="${p.id}" data-flavor="${f}">${f}</button>`).join('')}
-        </div>
-      </div>` : ''}
       <div class="slide-info">
         <div class="slide-meta">
           <span class="slide-brand-tag">${p.tag || 'Bang Legend · 150,000 Puffs'}</span>
+          ${p.flavors ? `
+          <div class="slide-flavors-wrap">
+            <span class="slide-flavors-label">3 arome disponibile</span>
+            <div class="slide-flavors">
+              ${p.flavors.map(f => `<button class="flavor-chip${f === selectedFlavors[p.id] ? ' active' : ''}" data-pid="${p.id}" data-flavor="${f}">${f}</button>`).join('')}
+            </div>
+          </div>` : ''}
           <div class="slide-name">${p.name}</div>
           ${!p.flavors ? `<div class="slide-chips">${(p.chips || ['150K Puffs', 'Premium', 'Nicotine']).map(c => `<span class="slide-chip">${c}</span>`).join('')}</div>` : ''}
           ${p.stock !== undefined ? `<div class="slide-stock${p.stock <= 2 ? ' slide-stock--low' : ''}">${p.stock <= 2 ? `⚠ Ultimele ${p.stock} bucăți!` : `Stoc: ${p.stock} buc`}</div>` : ''}
