@@ -324,7 +324,7 @@ function buildWaMsg() {
       return `• ${p.name}${flavor} x${qty} = ${priceFor(p) * qty} lei`;
     }).join('\n');
     const promoLine = pData ? `\n\n🎁 PROMO QR · COD: ${pData.code}` : '';
-    text = `Bună ziua! Vreau să comand de la Gorilla Vape:\n\n${lines}${promoLine}\n\nTOTAL: ${discSum} lei\n\nCând putem stabili ridicarea?`;
+    text = `Bună ziua! Vreau să comand de la Gorilla Vape:\n\n${lines}${promoLine}\n\nTOTAL: ${discSum} lei\n\nCând putem stabili livrarea?`;
   }
   return 'https://wa.me/40743391581?text=' + encodeURIComponent(text);
 }
