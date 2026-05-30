@@ -6,15 +6,6 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 /* ── DATA ─────────────────────────────────────────── */
 const PRODUCTS = [
   {
-    id:            'wb',
-    name:          'Watermelon Berries',
-    img:           'poze%20produse%20finale/watermelon%20berries.webp',
-    price:         69,
-    promoPrice:    60,
-    promoOldPrice: 70,
-    color:         '#C41E2A',
-  },
-  {
     id:            'br',
     name:          'Blueberry Raspberry',
     img:           'poze%20produse%20finale/blueberry%20raspberry.webp',
@@ -64,6 +55,16 @@ const PRODUCTS = [
     tag:           'Mystery Box · 3 Produse Random',
     chips:         ['3 Produse', 'Flavors Random', 'Economisești 81 LEI'],
     fill:          true,
+  },
+  {
+    id:            'wb',
+    name:          'Watermelon Berries',
+    img:           'poze%20produse%20finale/watermelon%20berries.webp',
+    price:         69,
+    promoPrice:    60,
+    promoOldPrice: 70,
+    color:         '#C41E2A',
+    outOfStock:    true,
   },
 ];
 
@@ -191,7 +192,10 @@ function renderProducts() {
              <div class="slide-price-old">${promoActive() && p.promoPrice ? (p.promoOldPrice || p.price) : (p.oldPrice || 100)} LEI</div>
              <div class="slide-price">${promoActive() && p.promoPrice ? p.promoPrice : p.price} <sub>LEI</sub></div>
           </div>
-          <button class="slide-add" data-pid="${p.id}">+ ADAUGĂ ÎN COȘ</button>
+          ${p.outOfStock
+            ? `<button class="slide-add slide-add--oos" disabled>STOC EPUIZAT</button>`
+            : `<button class="slide-add" data-pid="${p.id}">+ ADAUGĂ ÎN COȘ</button>`
+          }
         </div>
       </div>
     </div>
