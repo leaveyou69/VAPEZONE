@@ -13,7 +13,7 @@ const PRODUCTS = [
     promoPrice:    60,
     promoOldPrice: 70,
     color:         '#1E4FBF',
-    stock:         7,
+    outOfStock:    true,
     flavors:       ['Blueberry Raspberry', 'Blueberry Ice', 'Blueberry Cranberry Cherry'],
   },
   {
@@ -24,7 +24,7 @@ const PRODUCTS = [
     promoPrice:    60,
     promoOldPrice: 70,
     color:         '#7B1EC4',
-    stock:         1,
+    outOfStock:    true,
     flavors:       ['Grape Ice', 'Grape Bubble Gum', 'Raspberry Grapes'],
   },
   {
@@ -35,7 +35,7 @@ const PRODUCTS = [
     promoPrice:    60,
     promoOldPrice: 70,
     color:         '#1EC43A',
-    stock:         8,
+    stock:         1,
     flavors:       ['Guava Lime', 'Passionate Passion Fruit', 'Passion Fruit Lemon'],
   },
   {
@@ -46,7 +46,7 @@ const PRODUCTS = [
     promoPrice:    60,
     promoOldPrice: 70,
     color:         '#C4871E',
-    stock:         8,
+    stock:         3,
     flavors:       ['Mango Peach', 'Peach Ice', 'Blueberry Peach'],
   },
   {
@@ -63,6 +63,7 @@ const PRODUCTS = [
     tag:           'Mystery Box · 3 Produse Random',
     chips:         ['3 Produse', 'Flavors Random', 'Economisești 81 LEI'],
     fill:          true,
+    outOfStock:    true,
   },
   {
     id:            'wb',
